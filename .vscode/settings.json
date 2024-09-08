@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "c:/Workspace/projetos_pessoais/news-scrapper/."
+    ]
+}
