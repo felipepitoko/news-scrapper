@@ -4,6 +4,8 @@
 tasks:
   Ler workitem:
     shell: python -m robocorp.tasks run tasks.py
+  Acessar pagina:
+    shell: python -m robocorp.tasks run tasks_rpa.py
 
 environmentConfigs:
   - environment_windows_amd64_freeze.yaml
