@@ -24,7 +24,7 @@ def load_and_process_order(work_item: Input):
     
     try:
         # swag_labs.process_order(name, zip_code, items)
-        processed_item = {"Name": f'Your name is {name}', "Zip": zip_code, "Items": items}
+        processed_item = {"Name": f'Your name is {name}', "Zip": zip_code, "Items": items, "your_workload_is": work_item}
         """Receive an dict to create an output item"""
         workitems.outputs.create(payload=processed_item)
         work_item.done()

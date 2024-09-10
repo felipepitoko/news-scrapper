@@ -1,12 +1,14 @@
-{
-    "payload": {
-        "Name": "Zoya Roche",
-        "Zip": 3013,
-        "Items": [
-            "Sauce Labs Bolt T-Shirt",
-            "Sauce Labs Fleece Jacket",
-            "Sauce Labs Onesie"
-        ]
-    },
-    "files": {}
-}
+[
+    {
+        "payload": {
+            "Name": "Zoya Roche",
+            "Zip": 3013,
+            "Items": [
+                "Sauce Labs Bolt T-Shirt",
+                "Sauce Labs Fleece Jacket",
+                "Sauce Labs Onesie"
+            ]
+        },
+        "files": {}
+    }
+]
