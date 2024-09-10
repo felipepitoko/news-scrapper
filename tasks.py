@@ -2,7 +2,6 @@ import re
 from robocorp.tasks import task
 from robocorp import workitems
 from robocorp.workitems import Input
-
 @task
 def load_and_process_all_orders():
     
