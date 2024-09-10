@@ -60,7 +60,7 @@ class RobotRpa:
             self.driver.quit()
 
     def full_page_screenshot(self, url):
-        self.driver.get(url)
+        # self.driver.get(url)
         page_width = self.driver.execute_script('return document.body.scrollWidth')
         page_height = self.driver.execute_script('return document.body.scrollHeight')
         self.driver.set_window_size(page_width, page_height)
