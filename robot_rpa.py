@@ -1,4 +1,4 @@
-from RPA.core.webdriver import cache, download, start
+from RPA.core.webdriver import download, start
 import logging
 from selenium import webdriver
 
@@ -24,14 +24,15 @@ class RobotRpa:
 
     def set_webdriver(self, browser="Chrome"):
         options = self.set_chrome_options()
-        executable_driver_path = cache(browser)
-        if not executable_driver_path:
-            executable_driver_path = download(browser)
-            self.logger.warning("Using downloaded driver: %s" % executable_driver_path)
-        else:
-            self.logger.warning("Using cached driver: %s" % executable_driver_path)
+        self.driver = webdriver.Chrome(options=options)
+        # executable_driver_path = cache(browser)
+        # if not executable_driver_path:
+        #     executable_driver_path = download(browser)
+        #     self.logger.warning("Using downloaded driver: %s" % executable_driver_path)
+        # else:
+        #     self.logger.warning("Using cached driver: %s" % executable_driver_path)
 
-        self.driver = start("Chrome", executable_path=str(executable_driver_path), options=options)
+        # self.driver = start("Chrome", executable_path=str(executable_driver_path), options=options)
 
     def set_page_size(self, width:int, height:int):
         #Extract the current window size from the driver
