@@ -1,0 +1,548 @@
+V 0.0.4
+T 2024-09-10T03:54:32.279+00:00
+ID 1|630a5a67-6f28-11ef-aa55-581cf882083d
+I "sys.platform=win32"
+I "python=3.10.14 | packaged by conda-forge | (main, Mar 20 2024, 12:40:08) [MSC v.1938 64 bit (AMD64)]"
+M a:"tasks.py - load_and_process_all_orders"
+SR a|0.051
+M c:"Collect tasks"
+M d:"setup"
+M e:""
+P b:c|d|e|e|0
+ST b|0.051
+M f:"regular"
+M g:"\nCollecting task load_and_process_all_orders from: c:\\Workspace\\projetos_pessoais\\Robocorp\\news-scrapper\\tasks.py\n"
+C f|g|0.069
+M h:"PASS"
+ET h|e|8.837
+M j:"load_and_process_all_orders"
+M k:"tasks"
+M l:"c:\\Workspace\\projetos_pessoais\\Robocorp\\news-scrapper\\tasks.py"
+M m:null
+P i:j|k|l|m|6
+ST i|8.838
+M n:"===================== "
+C f|n|8.839
+M o:"Running: "
+C f|o|8.84
+M p:"task_name"
+C p|j|8.84
+M q:" =====================\n"
+C f|q|8.841
+M r:"METHOD"
+SE i|r|8.845
+M t:"for item in workitems.inputs"
+P s:t|k|l|e|9
+M u:"FOR"
+SE s|u|8.846
+M v:"stderr"
+M w:"Work items input path not defined, to simulate different input values set the\nenvironment variable `RC_WORKITEM_INPUT_PATH`.\n\nGenerated input path: C:\\Workspace\\projetos_pessoais\\Robocorp\\news-scrapper\\output\\work-items-in\\workitems.json\n\n"
+C v|w|8.85
+M y:"Step: for item in workitems.inputs"
+P x:y|k|l|e|9
+M z:"FOR_STEP"
+SE x|z|8.864
+M A:"item"
+M B:"Input"
+M C:"Input[id=0,payload=null,files=[],state=None,saved=True]"
+EA A|B|C
+M E:"load_and_process_order"
+P D:E|k|l|e|19
+SE D|r|8.866
+M F:"work_item"
+EA F|B|C
+M H:"WorkItem.payload"
+M I:"robocorp.workitems._workitem"
+M J:"c:\\ProgramData\\robocorp\\ht\\3d156d5_b1f3c24_1c0bc041\\lib\\site-packages\\robocorp\\workitems\\_workitem.py"
+P G:H|I|J|e|53
+SE G|r|8.867
+P K:H|I|J|e|55
+M L:"NoneType"
+M M:"None"
+R K|L|M|8.869
+EE r|h|8.87
+M N:"AttributeError: 'NoneType' object has no attribute 'get'"
+STB N|8.87
+M O:"c:\\ProgramData\\robocorp\\ht\\3d156d5_b1f3c24_1c0bc041\\lib\\site-packages\\robocorp\\tasks\\_task.py"
+M P:"run"
+M Q:"return self.method(**kwargs)"
+TBE O|57|P|Q
+M R:"self"
+M S:"Task"
+M T:"Task(load_and_process_all_orders, status: NOT_RUN)"
+TBV R|S|T
+M U:"kwargs"
+M V:"dict"
+M W:"{}"
+TBV U|V|W
+M X:"sig"
+M Y:"Signature"
+M Z:"<Signature ()>"
+TBV X|Y|Z
+M 0:"load_and_process_order(item)"
+TBE l|10|j|0
+TBV A|B|C
+M 1:"name = work_item.payload.get('Name')"
+TBE l|20|E|1
+TBV F|B|C
+ETB 8.876
+M 2:"ERROR"
+EE r|2|8.878
+EE z|2|8.88
+EE u|2|8.88
+M 3:"stdout"
+M 4:"'NoneType' object has no attribute 'get'"
+C 3|4|8.881
+M 5:"\n"
+C 3|5|8.882
+M 7:"Inputs.current"
+M 8:"robocorp.workitems"
+M 9:"c:\\ProgramData\\robocorp\\ht\\3d156d5_b1f3c24_1c0bc041\\lib\\site-packages\\robocorp\\workitems\\__init__.py"
+P 6:7|8|9|e|88
+SE 6|r|8.882
+P aa:7|8|9|e|90
+M ab:"Input[id=0,payload=null,files=[],state=FAILED,saved=True]"
+R aa|B|ab|8.884
+EE r|h|8.885
+M ad:"Input.fail"
+P ac:ad|I|J|e|459
+SE ac|r|8.886
+M ae:"exception_type"
+M af:"str"
+M ag:"'APPLICATION'"
+EA ae|af|ag
+M ah:"code"
+M ai:"'UNCAUGHT_ERROR'"
+EA ah|af|ai
+M aj:"message"
+M ak:"\"'NoneType' object has no attribute 'get'\""
+EA aj|af|ak
+STB N|8.888
+TBE O|57|P|Q
+TBV R|S|T
+TBV U|V|W
+TBV X|Y|Z
+TBE l|10|j|0
+TBV A|B|ab
+M al:"err"
+M am:"AttributeError"
+M an:"AttributeError(\"'NoneType' object has no attribute 'get'\")"
+TBV al|am|an
+TBE l|20|E|1
+TBV F|B|ab
+ETB 8.892
+M ao:"RuntimeError: Work item already released (this exception occurred during handling of the previous exception)"
+STB ao|8.892
+TBE O|57|P|Q
+TBV R|S|T
+TBV U|V|W
+TBV X|Y|Z
+M ap:"workitems.inputs.current.fail("
+TBE l|13|j|ap
+TBV A|B|ab
+TBV al|am|an
+M aq:"fail"
+M ar:"raise RuntimeError(\"Work item already released\")"
+TBE J|475|aq|ar
+TBV R|B|ab
+TBV ae|af|ag
+TBV ah|af|ai
+TBV aj|af|ak
+ETB 8.896
+EE r|2|8.901
+EE r|2|8.902
+C p|j|8.906
+M as:" status: "
+C f|as|8.907
+M at:"error"
+M au:"FAIL\n"
+C at|au|8.907
+M av:"\nWork item already released\n"
+C at|av|8.909
+M aw:"============= "
+C f|aw|8.909
+M ax:"Full Traceback (running "
+C f|ax|8.91
+C p|j|8.911
+M ay:")"
+C f|ay|8.911
+M az:" =============\n"
+C f|az|8.912
+M aA:"traceback"
+M aB:"Traceback (most recent call last):\n  File \"c:\\Workspace\\projetos_pessoais\\Robocorp\\news-scrapper\\tasks.py\", line 10, in load_and_process_all_orders\n    load_and_process_order(item)\n  File \"c:\\Workspace\\projetos_pessoais\\Robocorp\\news-scrapper\\tasks.py\", line 20, in load_and_process_order\n    name = work_item.payload.get('Name')\nAttributeError: 'NoneType' object has no attribute 'get'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"c:\\ProgramData\\robocorp\\ht\\3d156d5_b1f3c24_1c0bc041\\lib\\site-packages\\robocorp\\tasks\\_commands.py\", line 453, in run\n    result = task.run(**kwargs)\n  File \"c:\\ProgramData\\robocorp\\ht\\3d156d5_b1f3c24_1c0bc041\\lib\\site-packages\\robocorp\\tasks\\_task.py\", line 57, in run\n    return self.method(**kwargs)\n  File \"c:\\Workspace\\projetos_pessoais\\Robocorp\\news-scrapper\\tasks.py\", line 13, in load_and_process_all_orders\n    workitems.inputs.current.fail(\n  File \"c:\\ProgramData\\robocorp\\ht\\3d156d5_b1f3c24_1c0bc041\\lib\\site-packages\\robocorp\\workitems\\_workitem.py\", line 475, in fail\n    raise RuntimeError(\"Work item already released\")\nRuntimeError: Work item already released\n\n"
+C aA|aB|8.916
+M aC:"================================================================================\n"
+C f|aC|8.92
+M aD:"FAIL"
+M aE:"Work item already released"
+ET aD|aE|8.921
+M aG:"Teardown tasks"
+M aH:"teardown"
+P aF:aG|aH|e|e|0
+ST aF|8.921
+M aI:"Process snapshot"
+SPS aI|8.925
+M aJ:"System information:\nMemory: Total: 30.9 G, Available: 17.2 G, Used: 44.4 %\nCPUs: 16"
+P aK:e|e|e|e|0
+L I|aJ|aK|0|9.631
+M aL:"Current Process: python.exe (pid: 21084, status: running)\nCommand Line: c:\\ProgramData\\robocorp\\ht\\3d156d5_b1f3c24_1c0bc041\\python.exe c:\\Users\\felipe\\.vscode\\extensions\\ms-python.debugpy-2024.10.0-win32-x64\\bundled\\libs\\debugpy\\launcher/../..\\debugpy --connect 127.0.0.1:63942 --configure-qt none --adapter-access-token 0944ce6c69c43ca118ae3ab8f8ab5bd4456070e74ff6e0e576ca2f1cdb16e6cb -m robocorp.tasks run c:\\Workspace\\projetos_pessoais\\Robocorp\\news-scrapper\\tasks.py -t load_and_process_all_orders\nStarted: 00:54:25\nParent pid: 12948\nResident Set Size: 59.5 M\nVirtual Memory Size: 47.9 M"
+L I|aL|aK|0|9.658
+M aM:"OutputToPortThread|Thread ID: 14872 (daemon)"
+STD aM|9.658
+M aN:"c:\\Users\\felipe\\.vscode\\extensions\\ms-python.debugpy-2024.10.0-win32-x64\\bundled\\libs\\debugpy\\_vendored\\pydevd\\_pydev_bundle\\pydev_monkey.py"
+M aO:"__call__"
+M aP:"ret = self.original_func(*self.args, **self.kwargs)"
+TBE aN|1118|aO|aP
+M aQ:"_NewThreadStartupWithTrace"
+M aR:"<_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x000001AD381854E0>"
+TBV R|aQ|aR
+M aS:"py_db"
+M aT:"PyDB"
+M aU:"<pydevd.PyDB object at 0x000001AD36B53F70>"
+TBV aS|aT|aU
+M aV:"thread_id"
+M aW:"'pid_21084_id_1843482088288'"
+TBV aV|af|aW
+M aX:"t"
+M aY:"Thread"
+M aZ:"<Thread(OutputToPortThread, started daemon 14872)>"
+TBV aX|aY|aZ
+M a0:"c:\\ProgramData\\robocorp\\ht\\3d156d5_b1f3c24_1c0bc041\\lib\\threading.py"
+M a1:"_bootstrap"
+M a2:"self._bootstrap_inner()"
+TBE a0|973|a1|a2
+TBV R|aY|aZ
+M a3:"_bootstrap_inner"
+M a4:"self.run()"
+TBE a0|1016|a3|a4
+TBV R|aY|aZ
+M a5:"self._target(*self._args, **self._kwargs)"
+TBE a0|953|P|a5
+TBV R|aY|aZ
+M a6:"c:\\ProgramData\\robocorp\\ht\\3d156d5_b1f3c24_1c0bc041\\lib\\site-packages\\robocorp\\tasks\\_log_output_setup.py"
+M a7:"write_in_thread"
+M a8:"msg = q.get()"
+TBE a6|73|a7|a8
+M a9:"msg"
+M ba:"'ST aF|8.872\\n'"
+TBV a9|af|ba
+M bb:"client_socket"
+M bc:"socket"
+M bd:"<socket.socket fd=700, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 63957), raddr=('127.0.0.1', 56214)>"
+TBV bb|bc|bd
+M be:"log"
+M bf:"module"
+M bg:"<module 'robocorp.log' from 'c:\\\\ProgramData\\\\robocorp\\\\ht\\\\3d156d5_b1f3c24_1c0bc041\\\\lib\\\\site-packages\\\\robocorp\\\\log\\\\__init__.py'>"
+TBV be|bf|bg
+M bh:"port_in_env"
+M bi:"'56214'"
+TBV bh|af|bi
+M bj:"q"
+M bk:"Queue"
+M bl:"<queue.Queue object at 0x000001AD38185210>"
+TBV bj|bk|bl
+M bm:"c:\\ProgramData\\robocorp\\ht\\3d156d5_b1f3c24_1c0bc041\\lib\\queue.py"
+M bn:"get"
+M bo:"self.not_empty.wait()"
+TBE bm|171|bn|bo
+TBV R|bk|bl
+M bp:"block"
+M bq:"bool"
+M br:"True"
+TBV bp|bq|br
+M bs:"timeout"
+TBV bs|L|M
+M bt:"wait"
+M bu:"waiter.acquire()"
+TBE a0|320|bt|bu
+M bv:"Condition"
+M bw:"<Condition(<unlocked _thread.lock object at 0x000001AD38208A00>, 1)>"
+TBV R|bv|bw
+TBV bs|L|M
+M bx:"waiter"
+M by:"lock"
+M bz:"<locked _thread.lock object at 0x000001AD381C98C0>"
+TBV bx|by|bz
+M bA:"saved_state"
+TBV bA|L|M
+M bB:"gotit"
+M bC:"False"
+TBV bB|bq|bC
+ETD 9.667
+M bD:"pydevd.CheckAliveThread|Thread ID: 7428 (non daemon)"
+STD bD|9.667
+TBE a0|973|a1|a2
+M bE:"CheckAliveThread"
+M bF:"<CheckAliveThread(pydevd.CheckAliveThread, started 7428)>"
+TBV R|bE|bF
+TBE a0|1016|a3|a4
+TBV R|bE|bF
+M bG:"c:\\Users\\felipe\\.vscode\\extensions\\ms-python.debugpy-2024.10.0-win32-x64\\bundled\\libs\\debugpy\\_vendored\\pydevd\\_pydevd_bundle\\pydevd_daemon_thread.py"
+M bH:"self._on_run()"
+TBE bG|49|P|bH
+TBV R|bE|bF
+M bI:"created_pydb_daemon"
+M bJ:"{<WriterThread(pydevd.Writer, started daemon 17872)>: 1, <ReaderThread(pydevd.Reader, started daemon 15984)>: 1, <PyDBCommandThread(pydevd.CommandThread, started daemon 10264)>: 1, <CheckAliveThread(pydevd.CheckAliveThread, started 7428)>: 1}"
+TBV bI|V|bJ
+M bK:"c:\\Users\\felipe\\.vscode\\extensions\\ms-python.debugpy-2024.10.0-win32-x64\\bundled\\libs\\debugpy\\_vendored\\pydevd\\pydevd.py"
+M bL:"_on_run"
+M bM:"self._wait_event.wait(0.3)"
+TBE bK|261|bL|bM
+TBV R|bE|bF
+M bN:"can_exit"
+M bO:"function"
+M bP:"<function CheckAliveThread._on_run.<locals>.can_exit at 0x000001AD36E3BBE0>"
+TBV bN|bO|bP
+TBV aS|aT|aU
+M bQ:"signaled = self._cond.wait(timeout)"
+TBE a0|607|bt|bQ
+M bR:"Event"
+M bS:"<threading.Event object at 0x000001AD36BFDDB0>"
+TBV R|bR|bS
+M bT:"float"
+M bU:"0.3"
+TBV bs|bT|bU
+M bV:"signaled"
+TBV bV|bq|bC
+M bW:"gotit = waiter.acquire(True, timeout)"
+TBE a0|324|bt|bW
+M bX:"<Condition(<unlocked _thread.lock object at 0x000001AD380AF180>, 1)>"
+TBV R|bv|bX
+TBV bs|bT|bU
+M bY:"<locked _thread.lock object at 0x000001AD38551540>"
+TBV bx|by|bY
+TBV bA|L|M
+TBV bB|bq|bC
+ETD 9.673
+M bZ:"pydevd.CommandThread|Thread ID: 10264 (daemon)"
+STD bZ|9.673
+TBE a0|973|a1|a2
+M b0:"PyDBCommandThread"
+M b1:"<PyDBCommandThread(pydevd.CommandThread, started daemon 10264)>"
+TBV R|b0|b1
+TBE a0|1016|a3|a4
+TBV R|b0|b1
+TBE bG|49|P|bH
+TBV R|b0|b1
+TBV bI|V|bJ
+M b2:"self._py_db_command_thread_event.wait(0.3)"
+TBE bK|215|bL|b2
+TBV R|b0|b1
+M b3:"with self._cond:"
+TBE a0|604|bt|b3
+M b4:"<threading.Event object at 0x000001AD36B53C70>"
+TBV R|bR|b4
+TBV bs|bT|bU
+TBV bV|bq|bC
+M b5:"self._waiters.remove(waiter)"
+TBE a0|332|bt|b5
+M b6:"<Condition(<unlocked _thread.lock object at 0x000001AD380BA580>, 1)>"
+TBV R|bv|b6
+TBV bs|bT|bU
+M b7:"<locked _thread.lock object at 0x000001AD39FEFEC0>"
+TBV bx|by|b7
+TBV bA|L|M
+TBV bB|bq|bC
+ETD 9.676
+M b8:"pydevd.Reader|Thread ID: 15984 (daemon)"
+STD b8|9.676
+TBE a0|973|a1|a2
+M b9:"ReaderThread"
+M ca:"<ReaderThread(pydevd.Reader, started daemon 15984)>"
+TBV R|b9|ca
+TBE a0|1016|a3|a4
+TBV R|b9|ca
+TBE bG|49|P|bH
+TBV R|b9|ca
+TBV bI|V|bJ
+M cb:"c:\\Users\\felipe\\.vscode\\extensions\\ms-python.debugpy-2024.10.0-win32-x64\\bundled\\libs\\debugpy\\_vendored\\pydevd\\_pydevd_bundle\\pydevd_comm.py"
+M cc:"line = self._read_line()"
+TBE cb|222|bL|cc
+TBV R|b9|ca
+M cd:"content_len"
+M ce:"int"
+M cf:"-1"
+TBV cd|ce|cf
+M cg:"line"
+M ch:"bytes"
+M ci:"b'\\r\\n'"
+TBV cg|ch|ci
+M cj:"json_contents"
+M ck:"b'{\"seq\": 12, \"type\": \"request\", \"command\": \"threads\"}'"
+TBV cj|ch|ck
+M cl:"_read_line"
+M cm:"r = self.sock.recv(1024)"
+TBE cb|204|cl|cm
+TBV R|b9|ca
+M cn:"i"
+TBV cn|ce|cf
+ETD 9.679
+M co:"pydevd.Writer|Thread ID: 17872 (daemon)"
+STD co|9.679
+TBE a0|973|a1|a2
+M cp:"WriterThread"
+M cq:"<WriterThread(pydevd.Writer, started daemon 17872)>"
+TBV R|cp|cq
+TBE a0|1016|a3|a4
+TBV R|cp|cq
+TBE bG|49|P|bH
+TBV R|cp|cq
+TBV bI|V|bJ
+M cr:"cmd = self._cmd_queue.get(True, 0.1)"
+TBE cb|368|bL|cr
+TBV R|cp|cq
+M cs:"cmd"
+M ct:"NetCommand"
+M cu:"<_pydevd_bundle.pydevd_net_command.NetCommand object at 0x000001AD39AECE20>"
+TBV cs|ct|cu
+M cv:"self.not_empty.wait(remaining)"
+TBE bm|180|bn|cv
+M cw:"<queue.Queue object at 0x000001AD34056CB0>"
+TBV R|bk|cw
+TBV bp|bq|br
+M cx:"0.1"
+TBV bs|bT|cx
+M cy:"endtime"
+M cz:"94951.678"
+TBV cy|bT|cz
+M cA:"remaining"
+M cB:"-0.00900000000547152"
+TBV cA|bT|cB
+TBE a0|332|bt|b5
+M cC:"<Condition(<unlocked _thread.lock object at 0x000001AD380BACC0>, 1)>"
+TBV R|bv|cC
+M cD:"0.10000000000582077"
+TBV bs|bT|cD
+M cE:"<locked _thread.lock object at 0x000001AD38288480>"
+TBV bx|by|cE
+TBV bA|L|M
+TBV bB|bq|bC
+ETD 9.683
+M cF:"MainThread|Thread ID: 20348 (non daemon)"
+STD cF|9.683
+M cG:"c:\\ProgramData\\robocorp\\ht\\3d156d5_b1f3c24_1c0bc041\\lib\\site-packages\\robocorp\\log\\__init__.py"
+M cH:"process_snapshot"
+M cI:"robo_logger.process_snapshot()"
+TBE cG|270|cH|cI
+M cJ:"logger_instances"
+M cK:"{<robocorp.log._robo_logger._RoboLogger object at 0x000001AD37F293C0>: 1, <robocorp.log._robo_logger._RoboLogger object at 0x000001AD38185C00>: 1}"
+TBV cJ|V|cK
+M cL:"robo_logger"
+M cM:"_RoboLogger"
+M cN:"<robocorp.log._robo_logger._RoboLogger object at 0x000001AD37F293C0>"
+TBV cL|cM|cN
+M cO:"c:\\ProgramData\\robocorp\\ht\\3d156d5_b1f3c24_1c0bc041\\lib\\site-packages\\robocorp\\log\\_robo_logger.py"
+M cP:"new_func"
+M cQ:"return func(self, *args, **kwargs)"
+TBE cO|20|cP|cQ
+TBV R|cM|cN
+M cR:"args"
+M cS:"tuple"
+M cT:"()"
+TBV cR|cS|cT
+TBV U|V|W
+M cU:"func"
+M cV:"<function _RoboLogger.process_snapshot at 0x000001AD37F10F70>"
+TBV cU|bO|cV
+M cW:"return self._robot_output_impl.process_snapshot(hide_vars)"
+TBE cO|416|cH|cW
+TBV R|cM|cN
+M cX:"hide_vars"
+TBV cX|bq|bC
+M cY:"c:\\ProgramData\\robocorp\\ht\\3d156d5_b1f3c24_1c0bc041\\lib\\site-packages\\robocorp\\log\\_robo_output_impl.py"
+M cZ:"self._dump_threads(hide_vars)"
+TBE cY|748|cH|cZ
+TBV cX|bq|bC
+TBV be|bf|bg
+M c0:"entry_id"
+M c1:"'ps_3'"
+TBV c0|af|c1
+M c2:"entry_type"
+M c3:"'process_snapshot'"
+TBV c2|af|c3
+M c4:"psutil"
+M c5:"<module 'psutil' from 'c:\\\\ProgramData\\\\robocorp\\\\ht\\\\3d156d5_b1f3c24_1c0bc041\\\\lib\\\\site-packages\\\\psutil\\\\__init__.py'>"
+TBV c4|bf|c5
+M c6:"AccessDenied"
+M c7:"type"
+M c8:"<class 'psutil.AccessDenied'>"
+TBV c6|c7|c8
+M c9:"NoSuchProcess"
+M da:"<class 'psutil.NoSuchProcess'>"
+TBV c9|c7|da
+M db:"ZombieProcess"
+M dc:"<class 'psutil.ZombieProcess'>"
+TBV db|c7|dc
+M dd:"curr_process"
+M de:"Process"
+M df:"psutil.Process(pid=21084, name='python.exe', status='running', started='00:54:25')"
+TBV dd|de|df
+M dg:"log_info"
+M dh:"<function _RoboOutputImpl.process_snapshot.<locals>.log_info at 0x000001AD39F4AEF0>"
+TBV dg|bO|dh
+M di:"memory_info"
+M dj:"'Total: 30.9 G, Available: 17.2 G, Used: 44.4 %'"
+TBV di|af|dj
+M dk:"child_i"
+M dl:"0"
+TBV dk|ce|dl
+M dm:"child"
+TBV dm|de|df
+M dn:"name"
+M do:"'python.exe'"
+TBV dn|af|do
+M dp:"status"
+M dq:"'running'"
+TBV dp|af|dq
+M dr:"create_time"
+M ds:"'00:54:25'"
+TBV dr|af|ds
+M dt:"ppid"
+M du:"'12948'"
+TBV dt|af|du
+M dv:"cmdline"
+M dw:"'c:\\\\ProgramData\\\\robocorp\\\\ht\\\\3d156d5_b1f3c24_1c0bc041\\\\python.exe c:\\\\Users\\\\felipe\\\\.vscode\\\\extensions\\\\ms-python.debugpy-2024.10.0-win32-x64\\\\bundled\\\\libs\\\\debugpy\\\\launcher/../..\\\\debugpy --connect 127.0.0.1:63942 --configure-qt none --adapter-access-token 0944ce6c69c43ca118ae3ab8f8ab5bd4456070e74ff6e0e576ca2f1cdb16e6cb -m robocorp.tasks run c:\\\\Workspace\\\\projetos_pessoais\\\\Robocorp\\\\news-scrapper\\\\tasks.py -t load_and_process_all_orders'"
+TBV dv|af|dw
+M dx:"rss"
+M dy:"'59.5 M'"
+TBV dx|af|dy
+M dz:"vms"
+M dA:"'47.9 M'"
+TBV dz|af|dA
+M dB:"proc_memory_info"
+M dC:"pmem"
+M dD:"pmem(rss=62345216, vms=50278400, num_page_faults=68181, peak_wset=64417792, wset=62345216, peak_paged_pool=174000, paged_pool=173792, peak_nonpaged_pool=24656, nonpaged_pool=24520, pagefile=50278400, peak_pagefile=57090048, private=50278400)"
+TBV dB|dC|dD
+M dE:"'Current Process: python.exe (pid: 21084, status: running)\\nCommand Line: c:\\\\ProgramData\\\\robocorp\\\\ht\\\\3d156d5_b1f3c24_1c0bc041\\\\python.exe c:\\\\Users\\\\felipe\\\\.vscode\\\\extensions\\\\ms-python.debugpy-2024.10.0-win32-x64\\\\bundled\\\\libs\\\\debugpy\\\\launcher/../..\\\\debugpy --connect 127.0.0.1:63942 --configure-qt none --adapter-access-token 0944ce6c69c43ca118ae3ab8f8ab5bd4456070e74ff6e0e576ca2f1cdb16e6cb -m robocorp.tasks run c:\\\\Workspace\\\\projetos_pessoais\\\\Robocorp\\\\news-scrapper\\\\tasks.py -t load_and_process_all_orders\\nStarted: 00:54:25\\nParent pid: 12948\\nResident Set Size: 59.5 M\\nVirtual Memory Size: 47.9 M'"
+TBV aj|af|dE
+M dF:"_RoboOutputImpl"
+M dG:"<robocorp.log._robo_output_impl._RoboOutputImpl object at 0x000001AD36B7F2E0>"
+TBV R|dF|dG
+M dH:"_dump_threads"
+M dI:"stack.append((f, f.f_lineno))"
+TBE cY|769|dH|dI
+TBV R|dF|dG
+TBV cX|bq|bC
+M dJ:"20348"
+TBV aV|ce|dJ
+M dK:"frame"
+M dL:"<frame at 0x000001AD3A01E440, file 'c:\\\\ProgramData\\\\robocorp\\\\ht\\\\3d156d5_b1f3c24_1c0bc041\\\\lib\\\\site-packages\\\\robocorp\\\\log\\\\_robo_output_impl.py', line 773, code _dump_threads>"
+TBV dK|dK|dL
+M dM:"thread"
+M dN:"_MainThread"
+M dO:"<_MainThread(MainThread, started 20348)>"
+TBV dM|dN|dO
+M dP:"title"
+M dQ:"'MainThread|Thread ID: 20348 (non daemon)'"
+TBV dP|af|dQ
+M dR:"f"
+M dS:"<frame at 0x000001AD333F1720, file 'c:\\\\ProgramData\\\\robocorp\\\\ht\\\\3d156d5_b1f3c24_1c0bc041\\\\lib\\\\site-packages\\\\robocorp\\\\tasks\\\\_commands.py', line 494, code run>"
+TBV dR|dK|dS
+M dT:"stack"
+M dU:"list"
+M dV:"[(<frame at 0x000001AD39F46820, file 'c:\\\\ProgramData\\\\robocorp\\\\ht\\\\3d156d5_b1f3c24_1c0bc041\\\\lib\\\\site-packages\\\\robocorp\\\\log\\\\__init__.py', line 270, code process_snapshot>, 270), (<frame at 0x000001AD380D7640, file 'c:\\\\ProgramData\\\\robocorp\\\\ht\\\\3d156d5_b1f3c24_1c0bc041\\\\lib\\\\site-packages\\\\robocorp\\\\log\\\\_robo_logger.py', line 20, code new_func>, 20), (<frame at 0x000001AD39F4DA40, file 'c:\\\\ProgramData\\\\robocorp\\\\ht\\\\3d156d5_b1f3c24_1c0bc041\\\\lib\\\\site-packages\\\\robocorp\\\\log\\\\_robo_logger.py', line 416, code process_snapshot>, 416), (<frame at 0x000001AD364549D0, file 'c:\\\\ProgramData\\\\robocorp\\\\ht\\\\3d156d5_b1f3c24_1c0bc041\\\\lib\\\\site-packages\\\\robocorp\\\\log\\\\_robo_output_impl.py', line 748, code process_snapshot>, 748), (<frame at 0x000001AD3A01E440, file 'c:\\\\ProgramData\\\\robocorp\\\\ht\\\\3d156d5_b1f3c24_1c0bc041\\\\lib\\\\site-packages\\\\robocorp\\\\log\\\\_robo_output_impl.py', line 773, code _dump_threads>, 769)]"
+TBV dT|dU|dV
+ETD 9.706
+EPS 9.706
+ET h|e|9.79
+ER 2|9.79
