@@ -11,6 +11,6 @@ def minimal_task():
     selenium.set_webdriver()
     selenium.open_url("https://www.google.com/", "google.png")
     selenium.driver_quit()
-    workitems.outputs.create()
+    workitems.outputs.create({"file_saida": "google.png"})
     Output.add_file("google.png", "google.png")
     print("Done.")
