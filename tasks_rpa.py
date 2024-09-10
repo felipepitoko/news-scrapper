@@ -8,5 +8,6 @@ from robot_rpa import RobotRpa
 def minimal_task():
     selenium = RobotRpa()
     selenium.set_webdriver()
-    selenium.open_url("https://github.com/robocorp/rpaframework", "github.png")
+    selenium.open_url("https://www.google.com/", "google.png")
+    selenium.driver_quit()
     print("Done.")
