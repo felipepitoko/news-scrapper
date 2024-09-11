@@ -30,7 +30,7 @@ class RobotRpa:
         try:
             self.driver.get(url)
             if screenshot_name:
-                self.driver.get_screenshot_as_file(f'/output/{screenshot_name}')
+                self.driver.get_screenshot_as_file(f'output/{screenshot_name}')
         except Exception as e:
             self.logger.error(f"Error opening URL: {e}")
             raise e
