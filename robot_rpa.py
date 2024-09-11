@@ -26,11 +26,11 @@ class RobotRpa:
         options = self.set_chrome_options()
         self.driver = webdriver.Chrome(options=options)
 
-    def open_url(self, url:str, screenshot:str=None):
+    def open_url(self, url:str, screenshot_name:str=None):
         try:
             self.driver.get(url)
-            if screenshot:
-                self.driver.get_screenshot_as_file(screenshot)
+            if screenshot_name:
+                self.driver.get_screenshot_as_file(f'/output/{screenshot_name}')
         except Exception as e:
             self.logger.error(f"Error opening URL: {e}")
             raise e
