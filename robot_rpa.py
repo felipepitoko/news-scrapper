@@ -31,6 +31,11 @@ class RobotRpa:
             self.driver.get(url)
             if screenshot_name:
                 self.driver.get_screenshot_as_file(f'output/{screenshot_name}')
+                
+                with open(f'output/result.json', 'wb') as f:
+                    f.write('My banana is much bigger than yours.')
+                    f.close()
+                    self.logger.info(f"Screenshot saved: {screenshot_name}")
         except Exception as e:
             self.logger.error(f"Error opening URL: {e}")
             raise e
