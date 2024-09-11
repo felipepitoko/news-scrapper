@@ -1,6 +1,7 @@
 from RPA.core.webdriver import download, start
 import logging
 from selenium import webdriver
+import json, os
 
 
 
@@ -31,11 +32,21 @@ class RobotRpa:
             self.driver.get(url)
             if screenshot_name:
                 self.driver.get_screenshot_as_file(f'output/{screenshot_name}')
-                
-                with open(f'output/result.json', 'wb') as f:
-                    f.write('My banana is much bigger than yours.')
-                    f.close()
-                    self.logger.info(f"Screenshot saved: {screenshot_name}")
+
+                if not os.path.exists('output'):
+                    os.makedirs('output')
+
+                data = {
+                    "name": "John Doe",
+                    "age": 30,
+                    "city": "New York"
+                }
+
+                filepath = os.path.join('output', "data.json")
+
+                with open(filepath, "w") as f:
+                    json.dump(data, f, indent=4)
+
         except Exception as e:
             self.logger.error(f"Error opening URL: {e}")
             raise e
