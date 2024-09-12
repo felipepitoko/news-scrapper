@@ -23,7 +23,7 @@ class CustomSelenium:
 
     def set_webdriver(self, browser="Chrome"):
         options = self.set_chrome_options()
-        self.driver = Selenium(options=options,browser='Chrome')
+        self.driver = Selenium()
 
     def set_page_size(self, width:int, height:int):
         #Extract the current window size from the driver
