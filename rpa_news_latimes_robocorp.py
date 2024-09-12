@@ -51,12 +51,15 @@ class RpaNewsLatimesRobocorp:
         try:
             self.search_phrase = search_phrase
 
-            self.driver.click_element("css:input[data-element='search-form-input']")
+            self.driver.click_button("css:button[data-element='search-button']")
+            
+            self.driver.wait_until_element_is_visible("css:input[data-element='search-form-input']",timeout=5)
             self.driver.input_text("css:input[data-element='search-form-input']",search_phrase)
             
             self.driver.click_element("css:button[data-element='search-submit-button']")
 
-            self.driver.screenshot(locator=None,filename='output/search_results.png')            
+            self.driver.screenshot(locator=None,filename='output/search_results.png')      
+            self.logger.info(f"Search for {search_phrase} completed.")      
                 
         except Exception as e:
             self.logger.error(f"Error searching content: {e}")
