@@ -35,7 +35,7 @@ class CustomSelenium:
 
     def driver_quit(self):
         if self.driver:
-            self.driver.quit()
+            self.driver.close_browser()
 
 if __name__ == "__main__":
     custom_selenium = CustomSelenium()
