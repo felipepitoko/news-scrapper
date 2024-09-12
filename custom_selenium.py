@@ -31,7 +31,7 @@ class CustomSelenium:
     def open_url(self, url:str, screenshot:str=None):
         self.driver.go_to(url)
         if screenshot:
-            self.driver.screenshot(f'output/{screenshot}')
+            self.driver.screenshot(locator=None, filename=f'output/{screenshot}')
 
     def driver_quit(self):
         if self.driver:
