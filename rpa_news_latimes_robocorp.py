@@ -78,10 +78,14 @@ class RpaNewsLatimesRobocorp:
             
             topic_menu = self.driver.find_element('css:ul.search-filter-menu')    
             topic_list_options = topic_menu.find_elements('tag:li')
-            logging.info(f"Topic list options: {len(topic_list_options)}")
+            self.logger.info(f"Topic list options: {len(topic_list_options)}")
+
+            select_list = self.driver.get_list_items(topic_menu)
+            self.logger.info(f"Select list options: {select_list}")
 
             for topic in topic_list_options:
-                topic_name = topic.find_element('tag:span').text
+                topic_name = self.driver.get_text(topic.find_element('tag:span'))
+                
                 if topic_sort_key.upper() in topic_name.upper():
                     topic.click_element('tag:input')
                     break
