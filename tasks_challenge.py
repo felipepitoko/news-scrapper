@@ -12,7 +12,7 @@ def minimal_task():
         input = item.payload
         rpa = RpaNewsLatimes()
         rpa.set_webdriver()
-        rpa.open_url("https://www.latimes.com/", "latimes.png")
+        rpa.open_url("https://www.latimes.com/")
         rpa.search_content(search_phrase=input['search_phrase'])
         rpa.sort_news_results(topic_sort_key=input['topic_sort_key'])
         
