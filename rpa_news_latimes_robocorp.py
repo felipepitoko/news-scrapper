@@ -67,51 +67,56 @@ class RpaNewsLatimesRobocorp:
 
     def sort_news_results(self, topic_sort_key:str=None, type_sort_key:str=None):
         try:
-            sort_container = self.driver.find_element(By.CSS_SELECTOR, "select.select-input")
+            self.driver.select_from_list_by_value('css:select.select-input',value='1')
+
+            self.driver.screenshot(locator=None, filename='output/sorted_newest_results.png')            
+
+            self.logger.info(f"News sorted by newest.")
+
+            self.driver.click_button('css:button.see-all-button')
             
-            sort_input = Select(sort_container)
-            sort_input.select_by_visible_text('Newest')
-            time.sleep(5)           
+            topic_menu = self.driver.find_element('css:ul.search-filter-menu')    
+            topic_list_options = topic_menu.find_elements('css:li')
+            logging.info(f"Topic list options: {len(topic_list_options)}")
+
+            # see_all_buttons = self.driver.find_elements(By.CSS_SELECTOR, "button.see-all-button")
+            # for button in see_all_buttons:                    
+            #     button.click()
+            #     time.sleep(1)
             
-                
-            see_all_buttons = self.driver.find_elements(By.CSS_SELECTOR, "button.see-all-button")
-            for button in see_all_buttons:                    
-                button.click()
-                time.sleep(1)
+            # filter_menus = self.driver.find_elements(By.CSS_SELECTOR, "ul.search-filter-menu")
             
-            filter_menus = self.driver.find_elements(By.CSS_SELECTOR, "ul.search-filter-menu")
+            # topics_list = filter_menus[0].find_elements(By.TAG_NAME, "li")
+            # types_list = filter_menus[0].find_elements(By.TAG_NAME, "li")
             
-            topics_list = filter_menus[0].find_elements(By.TAG_NAME, "li")
-            types_list = filter_menus[0].find_elements(By.TAG_NAME, "li")
+            # shadow_host_container = self.driver.find_elements(By.CSS_SELECTOR, "[name='metering-bottompanel']")
             
-            shadow_host_container = self.driver.find_elements(By.CSS_SELECTOR, "[name='metering-bottompanel']")
+            # if shadow_host_container:
+            #     shadow_host = shadow_host_container[0]
+            #     shadow_root = self.driver.execute_script('return arguments[0].shadowRoot;', shadow_host)
+            #     element_in_shadow_dom = shadow_root.find_element(By.CSS_SELECTOR, "a.met-flyout-close")
+            #     element_in_shadow_dom.click()
             
-            if shadow_host_container:
-                shadow_host = shadow_host_container[0]
-                shadow_root = self.driver.execute_script('return arguments[0].shadowRoot;', shadow_host)
-                element_in_shadow_dom = shadow_root.find_element(By.CSS_SELECTOR, "a.met-flyout-close")
-                element_in_shadow_dom.click()
-            
-            if topic_sort_key:                
-                for topic in topics_list:
-                    topic_name = topic.find_element(By.TAG_NAME, "span").text
-                    if topic_sort_key.upper() in topic_name.upper():
-                        check_box = topic.find_element(By.TAG_NAME, "input")
-                        self.driver.execute_script("arguments[0].scrollIntoView({block: 'center', inline: 'center'});", check_box)                        
-                        check_box.click()
-                        time.sleep(3)
-                        print('Selected topic:', topic_name)
-                        break
+            # if topic_sort_key:                
+            #     for topic in topics_list:
+            #         topic_name = topic.find_element(By.TAG_NAME, "span").text
+            #         if topic_sort_key.upper() in topic_name.upper():
+            #             check_box = topic.find_element(By.TAG_NAME, "input")
+            #             self.driver.execute_script("arguments[0].scrollIntoView({block: 'center', inline: 'center'});", check_box)                        
+            #             check_box.click()
+            #             time.sleep(3)
+            #             print('Selected topic:', topic_name)
+            #             break
                     
-            if type_sort_key:                
-                for type in types_list:
-                    type_name = type.find_element(By.TAG_NAME, "span").text
-                    if type_sort_key.upper() in type_name.upper():
-                        check_box = type.find_element(By.TAG_NAME, "input")
-                        check_box.click()
-                        time.sleep(3)
-                        print('Selected type:', type_name)
-                        break
+            # if type_sort_key:                
+            #     for type in types_list:
+            #         type_name = type.find_element(By.TAG_NAME, "span").text
+            #         if type_sort_key.upper() in type_name.upper():
+            #             check_box = type.find_element(By.TAG_NAME, "input")
+            #             check_box.click()
+            #             time.sleep(3)
+            #             print('Selected type:', type_name)
+            #             break
 
         except Exception as e:
             self.logger.error(f"Error sorting news results: {e}")
