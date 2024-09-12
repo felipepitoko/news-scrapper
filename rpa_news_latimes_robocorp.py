@@ -80,8 +80,9 @@ class RpaNewsLatimesRobocorp:
             # topic_list_options = topic_menu.find_elements('tag:li')
             # self.logger.info(f"Topic list options: {len(topic_list_options)}")
 
-            select_list = self.driver.get_list_items(topic_menu)
-            self.logger.info(f"Select list options: {select_list}")
+            list_element = self.driver.find_element("li[span[text()='California']]",parent=topic_menu)
+            
+            self.logger.info(f"Found element: {list_element}")
 
             # for topic in topic_list_options:
             #     topic_name = self.driver.get_text(topic.find_element('tag:span'))
