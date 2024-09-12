@@ -1,14 +1,16 @@
 from datetime import datetime, date
 import re
-import pandas as pd
+from RPA.Excel.Files import Files
 
 def save_dict_to_xlsx(data:dict=None, filename:str=None)->None:
-    df = pd.DataFrame(data)
-    df.to_excel(f'{filename}', index=False)
+  lib = Files()
+  lib.create_workbook(path=filename, fmt="xlsx")
+  lib.create_worksheet(name="news data",content=data,header=True)
+  lib.save_workbook()
 
 def count_string_matches(string:str=None, substring:str=None)->int:
-    matches = re.findall(re.escape(substring), string)
-    return len(matches)
+  matches = re.findall(re.escape(substring), string)
+  return len(matches)
 
 def find_and_count_money_patterns(string_to_search:str='')->int:
   """Finds occurrences of money-related patterns in a string.
@@ -35,28 +37,28 @@ def find_and_count_money_patterns(string_to_search:str='')->int:
   return len(matches)
 
 def timestamp_to_date(timestamp:str=None)->str:
-    date = datetime.fromtimestamp(timestamp / 1000)
-    date_string = date.strftime('%Y-%m-%d')
-    # month = date.strftime('%B')
+  date = datetime.fromtimestamp(timestamp / 1000)
+  date_string = date.strftime('%Y-%m-%d')
+  # month = date.strftime('%B')
 
-    return date_string
+  return date_string
 
 def get_first_day_of_earlier_month(months_back:int=0)->str:    
-    today = date.today()
-    if months_back in [0,1]:
-        return date(today.year, today.month, 1).strftime('%Y-%m-%d')    
-    
-    months_back = months_back - 1
+  today = date.today()
+  if months_back in [0,1]:
+    return date(today.year, today.month, 1).strftime('%Y-%m-%d')    
+  
+  months_back = months_back - 1
 
-    target_month = today.month - months_back
+  target_month = today.month - months_back
 
-    if target_month <= 0:
-        target_month += 12
-        target_year = today.year - 1
-    else:
-        target_year = today.year
-        
-    return date(target_year, target_month, 1).strftime('%Y-%m-%d')
+  if target_month <= 0:
+    target_month += 12
+    target_year = today.year - 1
+  else:
+    target_year = today.year
+      
+  return date(target_year, target_month, 1).strftime('%Y-%m-%d')
 
 def compare_dates(date1:str=None, date2:str=None):
   """Compares two dates and returns True if date1 is earlier than date2."""
@@ -68,9 +70,9 @@ def compare_dates(date1:str=None, date2:str=None):
 
 
 if __name__ == '__main__':
-    month = get_first_day_of_earlier_month(3)
-    print(month,type(month))
-    actual_date = '2024-09-11'
-    print(compare_dates(actual_date, month))
+  month = get_first_day_of_earlier_month(3)
+  print(month,type(month))
+  actual_date = '2024-09-11'
+  print(compare_dates(actual_date, month))
     
     

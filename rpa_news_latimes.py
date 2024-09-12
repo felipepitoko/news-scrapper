@@ -207,10 +207,10 @@ class RpaNewsLatimes:
 
 if __name__ == "__main__":
     input = {
-        'search_phrase': "elections in usa",
-        'topic': "Entertainment & Arts",
-        'news_type': "",
-        'months': 0
+        "search_phrase": "elections in usa",
+        "topic": "Entertainment & Arts",
+        "news_type": "",
+        "months": 0
     }
 
     rpa = RpaNewsLatimes()
