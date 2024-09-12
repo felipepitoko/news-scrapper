@@ -9,12 +9,13 @@ def minimal_task():
 
     for item in workitems.inputs:
         try:
-            logger.info("Processing item with data: %s", item.payload)
+            workdata = item.payload
+            logger.info("Processing item with data: %s", workdata)
             selenium = CustomSelenium()
             selenium.set_webdriver()
-            selenium.open_url(item['access_link'], item['img_filename'])
+            selenium.open_url(workdata['access_link'], workdata['img_filename'])
             selenium.driver_quit()
-            logger.info("Processing item with data: %s", item.payload)
+            logger.info("End of processing item with data: %s", workdata)
         except Exception as e:
             logger.error("Error processing item with data %s: %s", item.payload, e)
             raise
