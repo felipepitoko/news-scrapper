@@ -6,10 +6,10 @@ from rpa_news_latimes_robocorp import RpaNewsLatimesRobocorp
 import logging
 
 from helper_functions import *
-# {
-#     "search_phrase": "fire in california",
-#     "topic_sort_key":""
-# }
+{
+    "search_phrase": "fire in california",
+    "topic_sort_key":""
+}
 @task
 def minimal_task():
     logger = logging.getLogger(__name__)
