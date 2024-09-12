@@ -8,8 +8,8 @@ tasks:
     shell: python -m robocorp.tasks run tasks_rpa.py
   Saving files:
     shell: python -m robocorp.tasks run saving_files.py
-  Scrap news:
-    shell: python -m robocorp.tasks run saving_files.py
+  Custom selenium:
+  shell: python -m robocorp.tasks run tasks_custom_selenium.py
 
 environmentConfigs:
   - environment_windows_amd64_freeze.yaml

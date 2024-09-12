@@ -1,10 +1,10 @@
-import json, os, time, logging, random, string
+import json, os, time, logging, random, string , re
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
-from helper_functions import timestamp_to_date, get_first_day_of_earlier_month, compare_dates
+from helper_functions import *
 
 
 class RpaNewsLatimes:
@@ -12,6 +12,7 @@ class RpaNewsLatimes:
     def __init__(self):
         self.driver = None
         self.logger = logging.getLogger(__name__)
+        self.search_phrase = None
         self.news_list = []
         
     def set_chrome_options(self):
@@ -32,18 +33,16 @@ class RpaNewsLatimes:
         if self.driver:
             self.driver.implicitly_wait(5)
 
-    def open_url(self, url:str, screenshot_name:str=None):
+    def open_url(self, url:str):
         try:
             self.driver.get(url)
-            if screenshot_name:
-                self.driver.get_screenshot_as_file(f'output/{screenshot_name}')
-
         except Exception as e:
             self.logger.error(f"Error opening URL: {e}")
             raise e
         
     def search_content(self, search_phrase:str=''):
         try:
+            self.search_phrase = search_phrase
             search_button = self.driver.find_element(By.CSS_SELECTOR, "button[data-element='search-button']")
             
             if search_button:                
@@ -93,7 +92,7 @@ class RpaNewsLatimes:
                         self.driver.execute_script("arguments[0].scrollIntoView({block: 'center', inline: 'center'});", check_box)                        
                         check_box.click()
                         time.sleep(3)
-                        print('Topic:', topic_name)
+                        print('Selected topic:', topic_name)
                         break
                     
             if type_sort_key:                
@@ -103,7 +102,7 @@ class RpaNewsLatimes:
                         check_box = type.find_element(By.TAG_NAME, "input")
                         check_box.click()
                         time.sleep(3)
-                        print('Type:', type_name)
+                        print('Selected type:', type_name)
                         break
 
         except Exception as e:
@@ -112,10 +111,6 @@ class RpaNewsLatimes:
 
     def get_news(self,max_months:int=0):
         try:
-            # search_results_container = self.driver.find_elements(By.CSS_SELECTOR, "ul.search-results-module-results-menu")
-            # print('total of conten windows',len(search_results_container))
-            # search_results_container = search_results_container[1]
-            
             all_news_retrieved = False
             max_date_to_search = get_first_day_of_earlier_month(max_months)
             
@@ -145,12 +140,8 @@ class RpaNewsLatimes:
                         
                         paragraph_description = div_content.find_element(By.CSS_SELECTOR, "p.promo-description")
                         news_description = paragraph_description.text
-                        
-                        
-                        
-                        print(news_date_str)
-                        
-                        # self.logger.info(f"News title: {news_title}")
+
+                        print(news_date_str)                        
                         print(f"News title: {news_title}")
                         
                         media_content = news.find_element(By.CSS_SELECTOR, "div.promo-media")
@@ -167,6 +158,18 @@ class RpaNewsLatimes:
                             image_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
                             image.screenshot(f'output/{image_name}.png') 
 
+                        
+                        title_matches = count_string_matches(self.search_phrase, news_title)
+                        description_matches = count_string_matches(self.search_phrase, news_description)
+                        total_search_matches = title_matches + description_matches
+
+                        title_money_matches = find_and_count_money_patterns(news_title)
+                        description_money_matches = find_and_count_money_patterns(news_description)
+                        total_money_matches = title_money_matches + description_money_matches
+
+                        print('Matches',total_search_matches)
+                        print('Money matches',total_money_matches)
+
                         print('------------------')
                         
                         self.news_list.append({
@@ -175,7 +178,8 @@ class RpaNewsLatimes:
                             'description': news_description,
                             'date': news_date_str,
                             'image_link': image_link,
-                            'image_name': image_name
+                            'image_name': image_name,
+                            'total_search_matches': total_search_matches
                         })
                         
                     except Exception as e:
@@ -204,17 +208,20 @@ class RpaNewsLatimes:
 if __name__ == "__main__":
     input = {
         'search_phrase': "elections in usa",
-        'topic_sort_key': "elections in usa",
-        'news_type_sort_key': "",
+        'topic': "Entertainment & Arts",
+        'news_type': "",
         'months': 0
     }
 
     rpa = RpaNewsLatimes()
     rpa.set_webdriver()
-    rpa.open_url("https://www.latimes.com/", "latimes.png")
+    rpa.open_url("https://www.latimes.com/")
     rpa.search_content(search_phrase=input['search_phrase'])
-    rpa.sort_news_results(topic_sort_key=input['topic_sort_key'])
+    rpa.sort_news_results(topic_sort_key=input['topic'])
     
     rpa.get_news(max_months=input['months'])    
 
     rpa.driver_quit()
+
+    news_list = rpa.export_retrieved_news()
+    save_dict_to_xlsx(news_list, 'output/news_list.xlsx')

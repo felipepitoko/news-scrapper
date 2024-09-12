@@ -1,4 +1,38 @@
 from datetime import datetime, date
+import re
+import pandas as pd
+
+def save_dict_to_xlsx(data:dict=None, filename:str=None)->None:
+    df = pd.DataFrame(data)
+    df.to_excel(f'{filename}', index=False)
+
+def count_string_matches(string:str=None, substring:str=None)->int:
+    matches = re.findall(re.escape(substring), string)
+    return len(matches)
+
+def find_and_count_money_patterns(string_to_search:str='')->int:
+  """Finds occurrences of money-related patterns in a string.
+
+  Args:
+    text: The string to search.
+
+  Returns:
+    A list of tuples, where each tuple contains the matched pattern and its starting index in the string.
+  """
+
+  patterns = [
+    r"\$\d+\.\d+",  # $11.1
+    r"\$\d{1,3}(,\d{3})*\.\d+",  # $111,111.11
+    r"\d+ dollars",  # 11 dollars
+    r"\d+ USD"  # 11 USD
+  ]
+
+  matches = []
+  for pattern in patterns:
+    for match in re.finditer(pattern, string_to_search):
+      matches.append((match.group(), match.start()))
+
+  return len(matches)
 
 def timestamp_to_date(timestamp:str=None)->str:
     date = datetime.fromtimestamp(timestamp / 1000)
@@ -21,10 +55,7 @@ def get_first_day_of_earlier_month(months_back:int=0)->str:
         target_year = today.year - 1
     else:
         target_year = today.year
-
-    # result_date = date(target_year, target_month, 1)
-    # result_string = result_date.strftime('%Y-%m-%d')
-    # print(result_string,type(result_string))
+        
     return date(target_year, target_month, 1).strftime('%Y-%m-%d')
 
 def compare_dates(date1:str=None, date2:str=None):
