@@ -5,6 +5,6 @@ from custom_selenium import CustomSelenium
 def minimal_task():
     selenium = CustomSelenium()
     selenium.set_webdriver()
-    selenium.open_url("https://www.google.com/", "google.png")
+    selenium.open_url("https://www.latimes.com/", "latimes.png")
     selenium.driver_quit()
     print("Done.")
