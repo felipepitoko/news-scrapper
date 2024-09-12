@@ -77,8 +77,14 @@ class RpaNewsLatimesRobocorp:
             self.driver.click_button('css:button.see-all-button')
             
             topic_menu = self.driver.find_element('css:ul.search-filter-menu')    
-            topic_list_options = topic_menu.find_elements('css:li')
+            topic_list_options = topic_menu.find_elements('tag:li')
             logging.info(f"Topic list options: {len(topic_list_options)}")
+
+            for topic in topic_list_options:
+                topic_name = topic.find_element('tag:span').text
+                if topic_sort_key.upper() in topic_name.upper():
+                    topic.click_element('tag:input')
+                    break
 
             # see_all_buttons = self.driver.find_elements(By.CSS_SELECTOR, "button.see-all-button")
             # for button in see_all_buttons:                    
