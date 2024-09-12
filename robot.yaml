@@ -10,6 +10,8 @@ tasks:
     shell: python -m robocorp.tasks run saving_files.py
   Custom selenium:
     shell: python -m robocorp.tasks run tasks_custom_selenium.py
+  thoughtfull ai challenge:
+    shell: python -m robocorp.tasks run tasks_challenge.py
 
 environmentConfigs:
   - environment_windows_amd64_freeze.yaml

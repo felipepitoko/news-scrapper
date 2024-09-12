@@ -4,6 +4,8 @@ from robocorp.workitems import Input
 from robocorp.workitems import Output
 from rpa_news_latimes import RpaNewsLatimes
 
+from helper_functions import *
+
 @task
 def minimal_task():
     rpa = RpaNewsLatimes()
@@ -15,3 +17,5 @@ def minimal_task():
     rpa.get_news(max_months=input['months'])    
 
     rpa.driver_quit()
+    news_list = rpa.export_retrieved_news()
+    save_dict_to_xlsx(news_list, 'output/news_list.xlsx')
