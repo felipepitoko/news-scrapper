@@ -7,7 +7,8 @@ import logging
 
 from helper_functions import *
 # {
-#   "search_phrase": "fire in california"
+#     "search_phrase": "fire in california",
+#     "topic_sort_key":""
 # }
 @task
 def minimal_task():

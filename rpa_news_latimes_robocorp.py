@@ -67,7 +67,7 @@ class RpaNewsLatimesRobocorp:
 
     def sort_news_results(self, topic_sort_key:str=None, type_sort_key:str=None):
         try:
-            self.driver.select_from_list_by_value('css:select.select-input',value='1')
+            self.driver.select_from_list_by_value('css:select.select-input',values='1')
 
             self.driver.screenshot(locator=None, filename='output/sorted_newest_results.png')            
 
