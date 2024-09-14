@@ -91,6 +91,7 @@ class RpaNewsLatimesRobocorp:
                 print(filter_text)
                 if filter_text.upper() == topic_sort_key.upper():
                     self.driver.scroll_element_into_view(locator=list_item)
+                    self.driver.wait_until_element_is_visible(locator=list_item, timeout=10)
                     self.driver.click_element(list_item)
                     break
 
