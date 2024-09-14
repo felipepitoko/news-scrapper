@@ -85,6 +85,10 @@ class RpaNewsLatimesRobocorp:
             self.logger.info(f"Found elements: {filter_list}")
             self.logger.info(f"{len(filter_list)} in total.")
 
+            for list_item in filter_list:
+                filter_text = self.driver.find_element("tag:span", parent=list_item)
+                print(filter_text.get_text())
+
             # for topic in topic_list_options:
             #     topic_name = self.driver.get_text(topic.find_element('tag:span'))
 
@@ -243,11 +247,11 @@ if __name__ == "__main__":
     rpa.set_webdriver()
     rpa.open_url("https://www.latimes.com/")
     rpa.search_content(search_phrase=input['search_phrase'])
-    rpa.sort_news_results(topic_sort_key=input['topic'])
+    # rpa.sort_news_results(topic_sort_key=input['topic'])
     
-    rpa.get_news(max_months=input['months'])    
+    # rpa.get_news(max_months=input['months'])    
 
-    rpa.driver_quit()
+    # rpa.driver_quit()
 
-    news_list = rpa.export_retrieved_news()
-    save_dict_to_xlsx(news_list, 'output/news_list.xlsx')
+    # news_list = rpa.export_retrieved_news()
+    # save_dict_to_xlsx(news_list, 'output/news_list.xlsx')
