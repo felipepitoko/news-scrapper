@@ -86,6 +86,8 @@ class RpaNewsLatimesRobocorp:
             # self.logger.info(f"{len(filter_list)} in total.")
 
             for list_item in filter_list:
+                self.driver.scroll_element_into_view(locator=list_item)
+                
                 filter_text = self.driver.find_element("tag:span", parent=list_item)
                 filter_text = self.driver.get_text(filter_text)
                 print(filter_text)
