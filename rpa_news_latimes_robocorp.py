@@ -87,7 +87,13 @@ class RpaNewsLatimesRobocorp:
 
             for list_item in filter_list:
                 filter_text = self.driver.find_element("tag:span", parent=list_item)
-                print(filter_text.get_text())
+                filter_text = self.driver.get_text(filter_text)
+                print(filter_text)
+                if filter_text.upper() == topic_sort_key.upper():
+                    self.driver.click_element(list_item)
+                    break
+
+            self.driver.screenshot(locator=None, filename='output/sorted_topic_results.png')
 
             # for topic in topic_list_options:
             #     topic_name = self.driver.get_text(topic.find_element('tag:span'))
