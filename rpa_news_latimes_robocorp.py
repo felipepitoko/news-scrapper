@@ -90,6 +90,7 @@ class RpaNewsLatimesRobocorp:
                 filter_text = self.driver.get_text(filter_text)
                 print(filter_text)
                 if filter_text.upper() == topic_sort_key.upper():
+                    self.driver.scroll_element_into_view(locator=list_item)
                     self.driver.click_element(list_item)
                     break
 
@@ -143,6 +144,7 @@ class RpaNewsLatimesRobocorp:
 
         except Exception as e:
             self.logger.error(f"Error sorting news results: {e}")
+            self.driver.screenshot(locator=None, filename='output/error_sorting_news_results.png')
             raise e
 
     def get_news(self,max_months:int=0):
