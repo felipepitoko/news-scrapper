@@ -80,7 +80,7 @@ class RpaNewsLatimesRobocorp:
             # topic_list_options = topic_menu.find_elements('tag:li')
             # self.logger.info(f"Topic list options: {len(topic_list_options)}")
 
-            filter_list = self.driver.find_elements("tag:li")
+            filter_list = self.driver.find_elements("tag:li",parent=topic_menu)
             
             self.logger.info(f"Found elements: {filter_list}")
             self.logger.info(f"{len(filter_list)} in total.")
