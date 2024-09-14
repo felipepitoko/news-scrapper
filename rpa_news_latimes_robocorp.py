@@ -75,25 +75,25 @@ class RpaNewsLatimesRobocorp:
             self.logger.info(f"News sorted by newest.")
 
             self.driver.click_button('css:button.see-all-button')
+
+            self.driver.screenshot(locator=None, filename='output/after_click_see_all.png')   
             
-            topic_menu = self.driver.find_element('css:ul.search-filter-menu')    
-            # topic_list_options = topic_menu.find_elements('tag:li')
-            # self.logger.info(f"Topic list options: {len(topic_list_options)}")
+            topic_menu = self.driver.find_element('css:ul.search-filter-menu')  
 
             filter_list = self.driver.find_elements("tag:li",parent=topic_menu)
             
-            self.logger.info(f"Found elements: {filter_list}")
-            self.logger.info(f"{len(filter_list)} in total.")
+            # self.logger.info(f"Found elements: {filter_list}")
+            # self.logger.info(f"{len(filter_list)} in total.")
 
             for list_item in filter_list:
                 filter_text = self.driver.find_element("tag:span", parent=list_item)
                 filter_text = self.driver.get_text(filter_text)
                 print(filter_text)
-                if filter_text.upper() == topic_sort_key.upper():
-                    self.driver.scroll_element_into_view(locator=list_item)
-                    self.driver.wait_until_element_is_visible(locator=list_item, timeout=10)
-                    self.driver.click_element(list_item)
-                    break
+                # if filter_text.upper() == topic_sort_key.upper():
+                #     self.driver.scroll_element_into_view(locator=list_item)
+                #     self.driver.wait_until_element_is_visible(locator=list_item, timeout=10)
+                #     self.driver.click_element(list_item)
+                #     break
 
             self.driver.screenshot(locator=None, filename='output/sorted_topic_results.png')
 
