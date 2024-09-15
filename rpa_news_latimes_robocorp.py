@@ -117,91 +117,93 @@ class RpaNewsLatimesRobocorp:
         try:
             all_news_retrieved = False
             max_date_to_search = get_first_day_of_earlier_month(max_months)
+                  
+            news_items = self.driver.find_elements("css:[data-content-type='article']")
+            print('News retrieved', len(news_items))
+
+            if not news_items:
+                all_news_retrieved = True
             
-            while not all_news_retrieved:            
-                news_items = self.driver.find_elements("[data-content-type='article']")
-                print('News retrieved', len(news_items))
-                
-                for news in news_items:
-                    try:
-                        div_content = self.driver.find_element("div.promo-content", parent= news)
-                        
-                        timestamp = self.driver.find_element("p.promo-timestamp", parent=div_content)
-                        timestamp = self.driver.get_element_attribute(timestamp, "data-timestamp")
-                        news_date_str = timestamp_to_date(int(timestamp))
-                        self.logger.info(f"News date: {news_date_str}")
-                        self.driver.screenshot(locator=None, filename=f'output/{news_date_str}_news.png')
-
-                        all_news_retrieved = True
-                        
-                        # if compare_dates(news_date_str, max_date_to_search):
-                        #     print('Got maximum of news!')
-                        #     print('!!!!!!!!!!!!!!!!!!!!!!!!')
-                        #     print(f'got {len(self.news_list)} articles!')
-                        #     all_news_retrieved = True
-                        #     break
-                        
-                        # promo_title = div_content.find_element(By.CSS_SELECTOR, "h3.promo-title")                    
-                        # title_link = promo_title.find_element(By.TAG_NAME, "a")
-                        # news_link = title_link.get_attribute("href")
-                        # news_title = title_link.text
-                        
-                        # paragraph_description = div_content.find_element(By.CSS_SELECTOR, "p.promo-description")
-                        # news_description = paragraph_description.text
-
-                        # print(news_date_str)                        
-                        # print(f"News title: {news_title}")
-                        
-                        # media_content = news.find_element(By.CSS_SELECTOR, "div.promo-media")
-                        # image = media_content.find_elements(By.CSS_SELECTOR, "img.image")
-                        
-                        # image_link = None
-                        # image_name = None
-                        
-                        # if image:
-                        #     image = image[0]
-                        #     image_link = image.get_attribute("src")
-                        #     # print('Image:', image_link)
-                            
-                        #     image_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
-                        #     image.screenshot(f'output/{image_name}.png') 
-
-                        
-                        # title_matches = count_string_matches(self.search_phrase, news_title)
-                        # description_matches = count_string_matches(self.search_phrase, news_description)
-                        # total_search_matches = title_matches + description_matches
-
-                        # title_money_matches = find_and_count_money_patterns(news_title)
-                        # description_money_matches = find_and_count_money_patterns(news_description)
-                        # total_money_matches = title_money_matches + description_money_matches
-
-                        # print('Matches',total_search_matches)
-                        # print('Money matches',total_money_matches)
-
-                        # print('------------------')
-                        
-                        # self.news_list.append({
-                        #     'title': news_title,
-                        #     'link': news_link,
-                        #     'description': news_description,
-                        #     'date': news_date_str,
-                        #     'image_link': image_link,
-                        #     'image_name': image_name,
-                        #     'total_search_matches': total_search_matches
-                        # })
-                        
-                    except Exception as e:
-                        self.logger.error(f"Error getting news: {e}")
-                        print(e)
-                        break
+            for news in news_items:
+                try:
+                    div_content = self.driver.find_element("div.promo-content", parent= news)
                     
-                # next_page_container = self.driver.find_element(By.CSS_SELECTOR, "div.search-results-module-next-page")
-                # next_page_link = next_page_container.find_elements(By.TAG_NAME, "a")
-                # if next_page_link:
-                #     next_page_link = next_page_link[0]
-                #     next_page_link.click()    
-                # else:
-                #     all_news_retrieved = True
+                    timestamp = self.driver.find_element("p.promo-timestamp", parent=div_content)
+                    timestamp = self.driver.get_element_attribute(timestamp, "data-timestamp")
+                    news_date_str = timestamp_to_date(int(timestamp))
+                    self.logger.info(f"News date: {news_date_str}")
+                    self.driver.screenshot(locator=None, filename=f'output/{news_date_str}_news.png')
+
+                    all_news_retrieved = True
+                    
+                    # if compare_dates(news_date_str, max_date_to_search):
+                    #     print('Got maximum of news!')
+                    #     print('!!!!!!!!!!!!!!!!!!!!!!!!')
+                    #     print(f'got {len(self.news_list)} articles!')
+                    #     all_news_retrieved = True
+                    #     break
+                    
+                    # promo_title = div_content.find_element(By.CSS_SELECTOR, "h3.promo-title")                    
+                    # title_link = promo_title.find_element(By.TAG_NAME, "a")
+                    # news_link = title_link.get_attribute("href")
+                    # news_title = title_link.text
+                    
+                    # paragraph_description = div_content.find_element(By.CSS_SELECTOR, "p.promo-description")
+                    # news_description = paragraph_description.text
+
+                    # print(news_date_str)                        
+                    # print(f"News title: {news_title}")
+                    
+                    # media_content = news.find_element(By.CSS_SELECTOR, "div.promo-media")
+                    # image = media_content.find_elements(By.CSS_SELECTOR, "img.image")
+                    
+                    # image_link = None
+                    # image_name = None
+                    
+                    # if image:
+                    #     image = image[0]
+                    #     image_link = image.get_attribute("src")
+                    #     # print('Image:', image_link)
+                        
+                    #     image_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+                    #     image.screenshot(f'output/{image_name}.png') 
+
+                    
+                    # title_matches = count_string_matches(self.search_phrase, news_title)
+                    # description_matches = count_string_matches(self.search_phrase, news_description)
+                    # total_search_matches = title_matches + description_matches
+
+                    # title_money_matches = find_and_count_money_patterns(news_title)
+                    # description_money_matches = find_and_count_money_patterns(news_description)
+                    # total_money_matches = title_money_matches + description_money_matches
+
+                    # print('Matches',total_search_matches)
+                    # print('Money matches',total_money_matches)
+
+                    # print('------------------')
+                    
+                    # self.news_list.append({
+                    #     'title': news_title,
+                    #     'link': news_link,
+                    #     'description': news_description,
+                    #     'date': news_date_str,
+                    #     'image_link': image_link,
+                    #     'image_name': image_name,
+                    #     'total_search_matches': total_search_matches
+                    # })
+                    
+                except Exception as e:
+                    all_news_retrieved = True
+                    self.logger.error(f"Error getting news: {e}")
+                    print(e)
+                
+            # next_page_container = self.driver.find_element(By.CSS_SELECTOR, "div.search-results-module-next-page")
+            # next_page_link = next_page_container.find_elements(By.TAG_NAME, "a")
+            # if next_page_link:
+            #     next_page_link = next_page_link[0]
+            #     next_page_link.click()    
+            # else:
+            #     all_news_retrieved = True
         except Exception as e:
             self.logger.error(f"Error getting news: {e}")
             raise e
