@@ -8,7 +8,8 @@ import logging
 from helper_functions import *
 {
     "search_phrase": "fire in california",
-    "topic_sort_key":"Television"
+    "topic_sort_key":"Television",
+    "months": 1
 }
 @task
 def minimal_task():
@@ -20,11 +21,10 @@ def minimal_task():
             rpa = RpaNewsLatimesRobocorp()
             rpa.set_webdriver()
             rpa.open_url("https://www.latimes.com/")
-            rpa.search_content(search_phrase=workdata['search_phrase'])
-            
-            rpa.sort_news_results(topic_sort_key=workdata['topic_sort_key'])
-            
-            # rpa.get_news(max_months=input['months'])    
+            rpa.search_content(search_phrase=workdata['search_phrase'])            
+            rpa.sort_news_results(topic_sort_key=workdata['topic_sort_key'])       
+
+            rpa.get_news(max_months=workdata['months'])    
 
             # rpa.driver_quit()
             # news_list = rpa.export_retrieved_news()

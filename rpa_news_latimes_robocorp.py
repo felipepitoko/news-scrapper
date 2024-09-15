@@ -74,92 +74,39 @@ class RpaNewsLatimesRobocorp:
 
             self.logger.info(f"News sorted by newest.")
 
-            self.driver.click_button('css:button.see-all-button')
+            if topic_sort_key:
+                self.driver.click_button('css:button.see-all-button')
 
-            self.driver.screenshot(locator=None, filename='output/after_click_see_all.png')   
+                self.driver.screenshot(locator=None, filename='output/after_click_see_all.png')   
 
-            time.sleep(5)
-            
-            topic_menu = self.driver.find_element('css:ul.search-filter-menu')  
-
-            filter_list = self.driver.find_elements("tag:li",parent=topic_menu)
-
-            self.driver.screenshot(locator=None, filename='output/start_get_list_items.png') 
-
-            for idx, list_item in enumerate(filter_list):
-                self.driver.scroll_element_into_view(locator=list_item)
-
-                shadow_host_container = self.driver.find_elements("[name='metering-bottompanel']")
-            
-                if shadow_host_container:
-                    self.driver.screenshot(locator=None, filename='output/shadow_root.png') 
-
-                    # shadow_host = shadow_host_container[0]                    
-                    # shadow_root = self.driver.execute_javascript('return arguments[0].shadowRoot;')
-
-                    # element_in_shadow_dom = shadow_root.find_element(By.CSS_SELECTOR, "a.met-flyout-close")
-                    # element_in_shadow_dom.click()
-                # self.driver.screenshot(locator=None, filename=f'output/{idx}_item.png') 
+                time.sleep(5)
                 
-                filter_text = self.driver.find_element("tag:span", parent=list_item)
-                filter_text:str = self.driver.get_text(filter_text)
-                print(filter_text)
+                topic_menu = self.driver.find_element('css:ul.search-filter-menu')  
 
-                if filter_text.upper() == topic_sort_key.upper():
+                filter_list = self.driver.find_elements("tag:li",parent=topic_menu)
+
+                self.driver.screenshot(locator=None, filename='output/start_get_list_items.png') 
+
+                for idx, list_item in enumerate(filter_list):
                     self.driver.scroll_element_into_view(locator=list_item)
-                    self.driver.wait_until_element_is_visible(locator=list_item, timeout=10)
-                    click_box = self.driver.find_element("css:input.checkbox-input-element", parent=list_item)
-                    self.driver.click_element(click_box)
-                    time.sleep(5)
-                    break
 
-            self.driver.screenshot(locator=None, filename='output/end_sorted_topic_results.png')
-
-            # for topic in topic_list_options:
-            #     topic_name = self.driver.get_text(topic.find_element('tag:span'))
-
-            #     if topic_sort_key.upper() in topic_name.upper():
-            #         topic.click_element('tag:input')
-            #         break
-
-            # see_all_buttons = self.driver.find_elements(By.CSS_SELECTOR, "button.see-all-button")
-            # for button in see_all_buttons:                    
-            #     button.click()
-            #     time.sleep(1)
-            
-            # filter_menus = self.driver.find_elements(By.CSS_SELECTOR, "ul.search-filter-menu")
-            
-            # topics_list = filter_menus[0].find_elements(By.TAG_NAME, "li")
-            # types_list = filter_menus[0].find_elements(By.TAG_NAME, "li")
-            
-            # shadow_host_container = self.driver.find_elements(By.CSS_SELECTOR, "[name='metering-bottompanel']")
-            
-            # if shadow_host_container:
-            #     shadow_host = shadow_host_container[0]
-            #     shadow_root = self.driver.execute_script('return arguments[0].shadowRoot;', shadow_host)
-            #     element_in_shadow_dom = shadow_root.find_element(By.CSS_SELECTOR, "a.met-flyout-close")
-            #     element_in_shadow_dom.click()
-            
-            # if topic_sort_key:                
-            #     for topic in topics_list:
-            #         topic_name = topic.find_element(By.TAG_NAME, "span").text
-            #         if topic_sort_key.upper() in topic_name.upper():
-            #             check_box = topic.find_element(By.TAG_NAME, "input")
-            #             self.driver.execute_script("arguments[0].scrollIntoView({block: 'center', inline: 'center'});", check_box)                        
-            #             check_box.click()
-            #             time.sleep(3)
-            #             print('Selected topic:', topic_name)
-            #             break
+                    shadow_host_container = self.driver.find_elements("[name='metering-bottompanel']")
+                
+                    if shadow_host_container:
+                        self.driver.screenshot(locator=None, filename='output/shadow_root.png') 
                     
-            # if type_sort_key:                
-            #     for type in types_list:
-            #         type_name = type.find_element(By.TAG_NAME, "span").text
-            #         if type_sort_key.upper() in type_name.upper():
-            #             check_box = type.find_element(By.TAG_NAME, "input")
-            #             check_box.click()
-            #             time.sleep(3)
-            #             print('Selected type:', type_name)
-            #             break
+                    filter_text = self.driver.find_element("tag:span", parent=list_item)
+                    filter_text:str = self.driver.get_text(filter_text)
+
+                    if filter_text.upper() == topic_sort_key.upper():
+                        self.driver.scroll_element_into_view(locator=list_item)
+                        self.driver.wait_until_element_is_visible(locator=list_item, timeout=10)
+                        click_box = self.driver.find_element("css:input.checkbox-input-element", parent=list_item)
+                        self.driver.click_element(click_box)
+                        time.sleep(5)
+                        break
+
+                self.driver.screenshot(locator=None, filename='output/end_sorted_topic_results.png')
 
         except Exception as e:
             self.logger.error(f"Error sorting news results: {e}")
@@ -172,85 +119,89 @@ class RpaNewsLatimesRobocorp:
             max_date_to_search = get_first_day_of_earlier_month(max_months)
             
             while not all_news_retrieved:            
-                news_items = self.driver.find_elements(By.CSS_SELECTOR, "[data-content-type='article']")
+                news_items = self.driver.find_elements("[data-content-type='article']")
                 print('News retrieved', len(news_items))
                 
                 for news in news_items:
                     try:
-                        div_content = news.find_element(By.CSS_SELECTOR, "div.promo-content")
+                        div_content = self.driver.find_element("div.promo-content", parent= news)
                         
-                        timestamp = div_content.find_element(By.CSS_SELECTOR, "p.promo-timestamp")
-                        timestamp = timestamp.get_attribute("data-timestamp")
+                        timestamp = self.driver.find_element("p.promo-timestamp", parent=div_content)
+                        timestamp = self.driver.get_element_attribute(timestamp, "data-timestamp")
                         news_date_str = timestamp_to_date(int(timestamp))
-                        
-                        if compare_dates(news_date_str, max_date_to_search):
-                            print('Got maximum of news!')
-                            print('!!!!!!!!!!!!!!!!!!!!!!!!')
-                            print(f'got {len(self.news_list)} articles!')
-                            all_news_retrieved = True
-                            break
-                        
-                        promo_title = div_content.find_element(By.CSS_SELECTOR, "h3.promo-title")                    
-                        title_link = promo_title.find_element(By.TAG_NAME, "a")
-                        news_link = title_link.get_attribute("href")
-                        news_title = title_link.text
-                        
-                        paragraph_description = div_content.find_element(By.CSS_SELECTOR, "p.promo-description")
-                        news_description = paragraph_description.text
+                        self.logger.info(f"News date: {news_date_str}")
+                        self.driver.screenshot(locator=None, filename=f'output/{news_date_str}_news.png')
 
-                        print(news_date_str)                        
-                        print(f"News title: {news_title}")
+                        all_news_retrieved = True
                         
-                        media_content = news.find_element(By.CSS_SELECTOR, "div.promo-media")
-                        image = media_content.find_elements(By.CSS_SELECTOR, "img.image")
+                        # if compare_dates(news_date_str, max_date_to_search):
+                        #     print('Got maximum of news!')
+                        #     print('!!!!!!!!!!!!!!!!!!!!!!!!')
+                        #     print(f'got {len(self.news_list)} articles!')
+                        #     all_news_retrieved = True
+                        #     break
                         
-                        image_link = None
-                        image_name = None
+                        # promo_title = div_content.find_element(By.CSS_SELECTOR, "h3.promo-title")                    
+                        # title_link = promo_title.find_element(By.TAG_NAME, "a")
+                        # news_link = title_link.get_attribute("href")
+                        # news_title = title_link.text
                         
-                        if image:
-                            image = image[0]
-                            image_link = image.get_attribute("src")
-                            # print('Image:', image_link)
+                        # paragraph_description = div_content.find_element(By.CSS_SELECTOR, "p.promo-description")
+                        # news_description = paragraph_description.text
+
+                        # print(news_date_str)                        
+                        # print(f"News title: {news_title}")
+                        
+                        # media_content = news.find_element(By.CSS_SELECTOR, "div.promo-media")
+                        # image = media_content.find_elements(By.CSS_SELECTOR, "img.image")
+                        
+                        # image_link = None
+                        # image_name = None
+                        
+                        # if image:
+                        #     image = image[0]
+                        #     image_link = image.get_attribute("src")
+                        #     # print('Image:', image_link)
                             
-                            image_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
-                            image.screenshot(f'output/{image_name}.png') 
+                        #     image_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+                        #     image.screenshot(f'output/{image_name}.png') 
 
                         
-                        title_matches = count_string_matches(self.search_phrase, news_title)
-                        description_matches = count_string_matches(self.search_phrase, news_description)
-                        total_search_matches = title_matches + description_matches
+                        # title_matches = count_string_matches(self.search_phrase, news_title)
+                        # description_matches = count_string_matches(self.search_phrase, news_description)
+                        # total_search_matches = title_matches + description_matches
 
-                        title_money_matches = find_and_count_money_patterns(news_title)
-                        description_money_matches = find_and_count_money_patterns(news_description)
-                        total_money_matches = title_money_matches + description_money_matches
+                        # title_money_matches = find_and_count_money_patterns(news_title)
+                        # description_money_matches = find_and_count_money_patterns(news_description)
+                        # total_money_matches = title_money_matches + description_money_matches
 
-                        print('Matches',total_search_matches)
-                        print('Money matches',total_money_matches)
+                        # print('Matches',total_search_matches)
+                        # print('Money matches',total_money_matches)
 
-                        print('------------------')
+                        # print('------------------')
                         
-                        self.news_list.append({
-                            'title': news_title,
-                            'link': news_link,
-                            'description': news_description,
-                            'date': news_date_str,
-                            'image_link': image_link,
-                            'image_name': image_name,
-                            'total_search_matches': total_search_matches
-                        })
+                        # self.news_list.append({
+                        #     'title': news_title,
+                        #     'link': news_link,
+                        #     'description': news_description,
+                        #     'date': news_date_str,
+                        #     'image_link': image_link,
+                        #     'image_name': image_name,
+                        #     'total_search_matches': total_search_matches
+                        # })
                         
                     except Exception as e:
                         self.logger.error(f"Error getting news: {e}")
                         print(e)
                         break
                     
-                next_page_container = self.driver.find_element(By.CSS_SELECTOR, "div.search-results-module-next-page")
-                next_page_link = next_page_container.find_elements(By.TAG_NAME, "a")
-                if next_page_link:
-                    next_page_link = next_page_link[0]
-                    next_page_link.click()    
-                else:
-                    all_news_retrieved = True
+                # next_page_container = self.driver.find_element(By.CSS_SELECTOR, "div.search-results-module-next-page")
+                # next_page_link = next_page_container.find_elements(By.TAG_NAME, "a")
+                # if next_page_link:
+                #     next_page_link = next_page_link[0]
+                #     next_page_link.click()    
+                # else:
+                #     all_news_retrieved = True
         except Exception as e:
             self.logger.error(f"Error getting news: {e}")
             raise e
