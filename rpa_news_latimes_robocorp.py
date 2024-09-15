@@ -108,8 +108,9 @@ class RpaNewsLatimesRobocorp:
                 if filter_text.upper() == topic_sort_key.upper():
                     self.driver.scroll_element_into_view(locator=list_item)
                     self.driver.wait_until_element_is_visible(locator=list_item, timeout=10)
-                    self.driver.click_element(list_item)
-                    time.sleep(3)
+                    click_box = self.driver.find_element("css:input.checkbox-input-element", parent=list_item)
+                    self.driver.click_element(click_box)
+                    time.sleep(5)
                     break
 
             self.driver.screenshot(locator=None, filename='output/end_sorted_topic_results.png')
