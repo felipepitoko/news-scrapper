@@ -88,6 +88,17 @@ class RpaNewsLatimesRobocorp:
 
             for idx, list_item in enumerate(filter_list):
                 self.driver.scroll_element_into_view(locator=list_item)
+
+                shadow_host_container = self.driver.find_elements("[name='metering-bottompanel']")
+            
+                if shadow_host_container:
+                    self.driver.screenshot(locator=None, filename='output/shadow_root.png') 
+
+                    # shadow_host = shadow_host_container[0]                    
+                    # shadow_root = self.driver.execute_javascript('return arguments[0].shadowRoot;')
+
+                    # element_in_shadow_dom = shadow_root.find_element(By.CSS_SELECTOR, "a.met-flyout-close")
+                    # element_in_shadow_dom.click()
                 # self.driver.screenshot(locator=None, filename=f'output/{idx}_item.png') 
                 
                 filter_text = self.driver.find_element("tag:span", parent=list_item)
