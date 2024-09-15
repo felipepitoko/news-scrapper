@@ -88,16 +88,18 @@ class RpaNewsLatimesRobocorp:
 
             for idx, list_item in enumerate(filter_list):
                 self.driver.scroll_element_into_view(locator=list_item)
-                self.driver.screenshot(locator=None, filename=f'output/{idx}_item.png') 
+                # self.driver.screenshot(locator=None, filename=f'output/{idx}_item.png') 
                 
                 filter_text = self.driver.find_element("tag:span", parent=list_item)
-                filter_text = self.driver.get_text(filter_text)
+                filter_text:str = self.driver.get_text(filter_text)
                 print(filter_text)
-                # if filter_text.upper() == topic_sort_key.upper():
-                #     self.driver.scroll_element_into_view(locator=list_item)
-                #     self.driver.wait_until_element_is_visible(locator=list_item, timeout=10)
-                #     self.driver.click_element(list_item)
-                #     break
+
+                if filter_text.upper() == topic_sort_key.upper():
+                    self.driver.scroll_element_into_view(locator=list_item)
+                    self.driver.wait_until_element_is_visible(locator=list_item, timeout=10)
+                    self.driver.click_element(list_item)
+                    time.sleep(3)
+                    break
 
             self.driver.screenshot(locator=None, filename='output/end_sorted_topic_results.png')
 
