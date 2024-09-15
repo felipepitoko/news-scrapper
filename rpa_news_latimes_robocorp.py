@@ -124,17 +124,20 @@ class RpaNewsLatimesRobocorp:
             if not news_items:
                 all_news_retrieved = True
             
-            for news in news_items:
+            for idx, news in enumerate(news_items):
                 try:
-                    div_content = self.driver.find_elements("div.promo-content", parent= news)
+                    div_content = self.driver.find_elements("css:div.promo-content", parent= news)
                     if div_content:
                         print('shadow banner found')
                     
-                    timestamp = self.driver.find_element("p.promo-timestamp", parent=div_content)
-                    timestamp = self.driver.get_element_attribute(timestamp, "data-timestamp")
-                    news_date_str = timestamp_to_date(int(timestamp))
-                    self.logger.info(f"News date: {news_date_str}")
-                    self.driver.screenshot(locator=None, filename=f'output/{news_date_str}_news.png')
+                    timestamp = self.driver.find_element("css:p.promo-timestamp", parent=div_content)
+                    if timestamp:
+                        print('timestamp found')
+                        timestamp = self.driver.get_element_attribute(timestamp, "data-timestamp")
+                        news_date_str = timestamp_to_date(int(timestamp))
+                        self.logger.info(f"News date: {news_date_str}")
+                    
+                    self.driver.screenshot(locator=None, filename=f'output/{idx}_{news_date_str}_news.png')
 
                     all_news_retrieved = True
                     
