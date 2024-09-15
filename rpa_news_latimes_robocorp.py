@@ -126,7 +126,9 @@ class RpaNewsLatimesRobocorp:
             
             for news in news_items:
                 try:
-                    div_content = self.driver.find_element("div.promo-content", parent= news)
+                    div_content = self.driver.find_elements("div.promo-content", parent= news)
+                    if div_content:
+                        print('shadow banner found')
                     
                     timestamp = self.driver.find_element("p.promo-timestamp", parent=div_content)
                     timestamp = self.driver.get_element_attribute(timestamp, "data-timestamp")
