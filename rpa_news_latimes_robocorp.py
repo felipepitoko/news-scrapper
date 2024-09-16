@@ -126,11 +126,17 @@ class RpaNewsLatimesRobocorp:
             
             for idx, news in enumerate(news_items):
                 try:
+                    image_link = None
+                    image_name = None
+                    news_title = None
+                    news_description = None
+                    news_link = None
+
                     div_content = self.driver.find_elements("css:div.promo-content", parent= news)
                     if div_content:
                         print('Conent banner found')
                     
-                    div_timestamp = self.driver.find_elements("css:p.promo-timestamp", parent=news)
+                    div_timestamp:list = self.driver.find_elements("css:p.promo-timestamp", parent=news)
                     if div_timestamp:
                         print('timestamp banner found')
                         div_timestamp = div_timestamp[0]
@@ -138,7 +144,7 @@ class RpaNewsLatimesRobocorp:
                         news_date_str = timestamp_to_date(int(timestamp))
                         print('The date of the news is',news_date_str)
 
-                    div_title = self.driver.find_elements("css:div.promo-title-container", parent=news)
+                    div_title:list = self.driver.find_elements("css:div.promo-title-container", parent=news)
                     if div_title:
                         div_title = div_title[0]
                         print('Title banner found')
@@ -149,7 +155,7 @@ class RpaNewsLatimesRobocorp:
                             news_link = self.driver.get_element_attribute(title_anchor, "href")
                             print('The title of the news is', news_title)
 
-                    div_description = self.driver.find_elements("css:p.promo-description", parent=news)
+                    div_description:list= self.driver.find_elements("css:p.promo-description", parent=news)
                     if div_description:
                         div_description = div_description[0]
                         print('Description banner found')
@@ -157,7 +163,7 @@ class RpaNewsLatimesRobocorp:
                         print('The description of the news is', news_description)
 
 
-                    div_promo_media = self.driver.find_elements("css:div.promo-media", parent=news)
+                    div_promo_media:list = self.driver.find_elements("css:div.promo-media", parent=news)
                     if div_promo_media:
                         div_promo_media = div_promo_media[0]
                         print('Promo media banner found')
@@ -175,75 +181,48 @@ class RpaNewsLatimesRobocorp:
                                 
                             image_link = self.driver.get_element_attribute(image, "src")
                             self.driver.capture_element_screenshot(image, f'output/{idx}_{news_date_str}_news.png' if not image_link else f'output/{image_name}.png')
-                    
-                    # self.driver.screenshot(locator=None, filename=f'output/{idx}_{news_date_str}_news.png')
+
+                    title_matches = count_string_matches(self.search_phrase, news_title)
+                    description_matches = count_string_matches(self.search_phrase, news_description)
+                    total_search_matches = title_matches + description_matches
+
+                    title_money_matches = find_and_count_money_patterns(news_title)
+                    description_money_matches = find_and_count_money_patterns(news_description)
+                    total_money_matches = title_money_matches + description_money_matches
+
+                    print('Matches',total_search_matches)
+                    print('Money matches',total_money_matches)
+
+
+                    self.news_list.append({
+                        'title': news_title,
+                        'link': news_link,
+                        'description': news_description,
+                        'date': news_date_str,
+                        'image_link': image_link,
+                        'image_name': image_name,
+                        'total_search_matches': total_search_matches,
+                        'total_money_matches': total_money_matches
+                    })
 
                     all_news_retrieved = True
-                    
-                    # if compare_dates(news_date_str, max_date_to_search):
-                    #     print('Got maximum of news!')
-                    #     print('!!!!!!!!!!!!!!!!!!!!!!!!')
-                    #     print(f'got {len(self.news_list)} articles!')
-                    #     all_news_retrieved = True
-                    #     break
-                    
-                    # promo_title = div_content.find_element(By.CSS_SELECTOR, "h3.promo-title")                    
-                    # title_link = promo_title.find_element(By.TAG_NAME, "a")
-                    # news_link = title_link.get_attribute("href")
-                    # news_title = title_link.text
-                    
-                    # paragraph_description = div_content.find_element(By.CSS_SELECTOR, "p.promo-description")
-                    # news_description = paragraph_description.text
-
-                    # print(news_date_str)                        
-                    # print(f"News title: {news_title}")
-                    
-                    # media_content = news.find_element(By.CSS_SELECTOR, "div.promo-media")
-                    # image = media_content.find_elements(By.CSS_SELECTOR, "img.image")
-                    
-                    # image_link = None
-                    # image_name = None
-                    
-                    # if image:
-                    #     image = image[0]
-                    #     image_link = image.get_attribute("src")
-                    #     # print('Image:', image_link)
-                        
-                    #     image_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
-                    #     image.screenshot(f'output/{image_name}.png') 
-
-                    
-                    # title_matches = count_string_matches(self.search_phrase, news_title)
-                    # description_matches = count_string_matches(self.search_phrase, news_description)
-                    # total_search_matches = title_matches + description_matches
-
-                    # title_money_matches = find_and_count_money_patterns(news_title)
-                    # description_money_matches = find_and_count_money_patterns(news_description)
-                    # total_money_matches = title_money_matches + description_money_matches
-
-                    # print('Matches',total_search_matches)
-                    # print('Money matches',total_money_matches)
-
-                    # print('------------------')
-                    
-                    # self.news_list.append({
-                    #     'title': news_title,
-                    #     'link': news_link,
-                    #     'description': news_description,
-                    #     'date': news_date_str,
-                    #     'image_link': image_link,
-                    #     'image_name': image_name,
-                    #     'total_search_matches': total_search_matches
-                    # })
-                    
                 except Exception as e:
                     all_news_retrieved = True
                     self.logger.error(f"Error getting news: {e}")
                     self.driver.screenshot(locator=None, filename='output/error_getting_each_news.png')
                     print(e)
                 
-            # next_page_container = self.driver.find_element(By.CSS_SELECTOR, "div.search-results-module-next-page")
-            # next_page_link = next_page_container.find_elements(By.TAG_NAME, "a")
+            next_page_container = self.driver.find_elements("css:div.search-results-module-next-page")
+            
+            if next_page_container:
+                next_page_container = next_page_container[0]
+                next_page_link = self.driver.find_elements("tag:a",parent=next_page_container)
+                if next_page_link:
+                    next_page_link = next_page_link[0]
+                    self.driver.click_element(next_page_link)
+                    self.driver.screenshot(locator=None, filename='output/next_page_clicked.png')
+            else:
+                all_news_retrieved = True
             # if next_page_link:
             #     next_page_link = next_page_link[0]
             #     next_page_link.click()    

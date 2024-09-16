@@ -26,9 +26,9 @@ def minimal_task():
 
             rpa.get_news(max_months=workdata['months'])    
 
-            # rpa.driver_quit()
-            # news_list = rpa.export_retrieved_news()
-            # save_dict_to_xlsx(news_list, 'output/news_list.xlsx')
+            rpa.driver_quit()
+            news_list = rpa.export_retrieved_news()
+            save_dict_to_xlsx(news_list, 'output/news_list.xlsx')
             logger.info(f"Ended process to workdata: {workdata}")
     except Exception as e:
         logger.error(f"Error on task execution: {e}")
