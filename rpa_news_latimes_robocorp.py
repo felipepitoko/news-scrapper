@@ -133,12 +133,14 @@ class RpaNewsLatimesRobocorp:
                     div_timestamp = self.driver.find_elements("css:p.promo-timestamp", parent=news)
                     if div_timestamp:
                         print('timestamp banner found')
+                        div_timestamp = div_timestamp[0]
                         timestamp = self.driver.get_element_attribute(div_timestamp, "data-timestamp")
                         news_date_str = timestamp_to_date(int(timestamp))
                         print('The date of the news is',news_date_str)
 
                     div_title = self.driver.find_elements("css:div.promo-title-container", parent=news)
                     if div_title:
+                        div_title = div_title[0]
                         print('Title banner found')
                         title_anchor = self.driver.find_elements("css:a.link", parent=div_title)
                         if title_anchor:
@@ -149,6 +151,7 @@ class RpaNewsLatimesRobocorp:
 
                     div_description = self.driver.find_elements("css:p.promo-description", parent=news)
                     if div_description:
+                        div_description = div_description[0]
                         print('Description banner found')
                         news_description = self.driver.get_text(div_description)
                         print('The description of the news is', news_description)
@@ -156,6 +159,7 @@ class RpaNewsLatimesRobocorp:
 
                     div_promo_media = self.driver.find_elements("css:div.promo-media", parent=news)
                     if div_promo_media:
+                        div_promo_media = div_promo_media[0]
                         print('Promo media banner found')
                         image = self.driver.find_elements("css:img.image", parent=div_promo_media)
                         image_link = self.driver.find_elements("css:a.promo-placeholder", parent=div_promo_media)
