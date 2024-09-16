@@ -1,4 +1,3 @@
-# news-scrapper
 <h1>News Scrapper</h1>
 
 <h2>Description</h2>
