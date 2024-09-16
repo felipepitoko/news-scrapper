@@ -10,6 +10,8 @@ def minimal_task():
     logger = logging.getLogger(__name__)
 
     try:
+        check_output_directory()
+        
         for item in workitems.inputs:
             logger.info(f"Started working on workitem.")
             workdata = item.payload

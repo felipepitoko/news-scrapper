@@ -1,7 +1,12 @@
-import re
+import re, os
 from datetime import datetime, date
 
 from RPA.Excel.Files import Files
+
+def check_output_directory():
+  """Checks if the output directory exists and creates it if it doesn't."""
+
+  os.path.exists('output') or os.mkdir('output') 
 
 def save_dict_to_xlsx(data:dict=None, filename:str=None)->None:
   """Saves a dictionary to an Excel file.
