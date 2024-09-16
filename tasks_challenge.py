@@ -1,22 +1,17 @@
-from robocorp.tasks import task
-from robocorp import workitems
-from robocorp.workitems import Input
-from robocorp.workitems import Output
-from rpa_news_latimes_robocorp import RpaNewsLatimesRobocorp
 import logging
 
+from robocorp.tasks import task
+from robocorp import workitems
+from rpa_news_latimes_robocorp import RpaNewsLatimesRobocorp
+
 from helper_functions import *
-{
-    "search_phrase": "fire in california",
-    "topic_sort_key":"Television",
-    "months": 1
-}
 @task
 def minimal_task():
     logger = logging.getLogger(__name__)
 
     try:
         for item in workitems.inputs:
+            logger.info(f"Started working on workitem.")
             workdata = item.payload
             rpa = RpaNewsLatimesRobocorp()
             rpa.set_webdriver()
