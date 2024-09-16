@@ -128,16 +128,21 @@ class RpaNewsLatimesRobocorp:
                 try:
                     div_content = self.driver.find_elements("css:div.promo-content", parent= news)
                     if div_content:
-                        print('shadow banner found')
+                        print('Conent banner found')
                     
-                    timestamp = self.driver.find_element("css:p.promo-timestamp", parent=div_content)
-                    if timestamp:
-                        print('timestamp found')
-                        timestamp = self.driver.get_element_attribute(timestamp, "data-timestamp")
-                        news_date_str = timestamp_to_date(int(timestamp))
-                        self.logger.info(f"News date: {news_date_str}")
+                    div_timestamp = self.driver.find_elements("css:p.promo-timestamp", parent=news)
+                    if div_timestamp:
+                        print('timestamp banner found')
+
+                    div_title = self.driver.find_elements("css:div.promo-title-container", parent=news)
+                    if div_title:
+                        print('Title banner found')
+
+                    div_description = self.driver.find_elements("css:p.promo-description", parent=news)
+                    if div_description:
+                        print('Description banner found')
                     
-                    self.driver.screenshot(locator=None, filename=f'output/{idx}_{news_date_str}_news.png')
+                    # self.driver.screenshot(locator=None, filename=f'output/{idx}_{news_date_str}_news.png')
 
                     all_news_retrieved = True
                     
@@ -200,6 +205,7 @@ class RpaNewsLatimesRobocorp:
                 except Exception as e:
                     all_news_retrieved = True
                     self.logger.error(f"Error getting news: {e}")
+                    self.driver.screenshot(locator=None, filename='output/error_getting_each_news.png')
                     print(e)
                 
             # next_page_container = self.driver.find_element(By.CSS_SELECTOR, "div.search-results-module-next-page")
