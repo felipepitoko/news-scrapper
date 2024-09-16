@@ -267,7 +267,7 @@ class RpaNewsLatimesRobocorp:
                             'image_link': image_link,
                             'image_name': f"{image_name}.png",
                             'total_search_matches': total_search_matches,
-                            'total_money_matches': total_money_matches
+                            'money_mentioned': 'True' if total_money_matches else 'False'
                         })
 
                         all_news_retrieved = True
@@ -293,7 +293,7 @@ class RpaNewsLatimesRobocorp:
                         all_news_retrieved = True    
                         self.logger.info("No more news to retrieve.")
                 except Exception as e:
-                    print(e)
+                    self.logger.error(f"Error getting next page: {e}")
                     all_news_retrieved = True
 
         except Exception as e:

@@ -19,7 +19,7 @@ def minimal_task():
             rpa.search_content(search_phrase=workdata['search_phrase'])            
             rpa.sort_news_results(topic_sort_key=workdata['topic_sort_key'])       
 
-            rpa.get_news(max_months=workdata['months'])    
+            rpa.get_news(max_months=workdata['months_to_search'])    
 
             rpa.driver_quit()
             news_list = rpa.export_retrieved_news()
