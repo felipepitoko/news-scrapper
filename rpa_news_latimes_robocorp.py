@@ -133,14 +133,44 @@ class RpaNewsLatimesRobocorp:
                     div_timestamp = self.driver.find_elements("css:p.promo-timestamp", parent=news)
                     if div_timestamp:
                         print('timestamp banner found')
+                        timestamp = self.driver.get_element_attribute(div_timestamp, "data-timestamp")
+                        news_date_str = timestamp_to_date(int(timestamp))
+                        print('The date of the news is',news_date_str)
 
                     div_title = self.driver.find_elements("css:div.promo-title-container", parent=news)
                     if div_title:
                         print('Title banner found')
+                        title_anchor = self.driver.find_elements("css:a.link", parent=div_title)
+                        if title_anchor:
+                            print('Title anchor found')
+                            news_title = self.driver.get_text(title_anchor)
+                            news_link = self.driver.get_element_attribute(title_anchor, "href")
+                            print('The title of the news is', news_title)
 
                     div_description = self.driver.find_elements("css:p.promo-description", parent=news)
                     if div_description:
                         print('Description banner found')
+                        news_description = self.driver.get_text(div_description)
+                        print('The description of the news is', news_description)
+
+
+                    div_promo_media = self.driver.find_elements("css:div.promo-media", parent=news)
+                    if div_promo_media:
+                        print('Promo media banner found')
+                        image = self.driver.find_elements("css:img.image", parent=div_promo_media)
+                        image_link = self.driver.find_elements("css:a.promo-placeholder", parent=div_promo_media)
+                        if image:
+                            image = image[0]
+                            print('Image banner found')
+                            image_name = None
+                            if image_link:
+                                image_link = image_link[0]
+                                image_name = self.driver.get_element_attribute(image_link, "href")
+                                image_name = image_name.split('/')[-1]
+                                print('Image name found')
+                                
+                            image_link = self.driver.get_element_attribute(image, "src")
+                            self.driver.capture_element_screenshot(image, f'output/{idx}_{news_date_str}_news.png' if not image_link else f'output/{image_name}.png')
                     
                     # self.driver.screenshot(locator=None, filename=f'output/{idx}_{news_date_str}_news.png')
 
