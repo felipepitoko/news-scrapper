@@ -93,12 +93,16 @@ class RpaNewsLatimesRobocorp:
             select_list = self.driver.find_element('css:select.select-input')
             self.driver.select_from_list_by_value(select_list, '1')
 
+            time.sleep(5)
+
             self.logger.info(f"News sorted by newest.")
+            self.driver.screenshot(locator=None, 
+                                   filename='output/sorted_newest.png')
 
             if topic_sort_key:
                 self.driver.click_button('css:button.see-all-button')  
 
-                time.sleep(5)
+                time.sleep(3)
                 
                 topic_menu = self.driver.find_element(
                     'css:ul.search-filter-menu')  
