@@ -17,7 +17,9 @@ Inputs:
 <li><b>search_phrase:</b> some text to search for. Ex.: "elections in the usa"</li>
 <li><b>topic_sort_key:</b> a topic to filter the search results. Ex.: "Business"</li>
 <li><b>months_to_search:</b> the count of months to get news of. Ex.: 1 for only this month, 2 to this and the last month, and so on.</li>
+<li><b>order_by:</b> "newest", "oldest" or "relevance", wich is the default*.</li>
 </ul>
+<p>*I noticed that latimes webpage would lost the search context when "newest" order was selected is sort options. So, i decided to put an variable to trigger or not this behavior.</p>
 
 <p>The robot should create on output directory an excel file with title and some details about each news of the search.
 It will also save the news main picture, when present.

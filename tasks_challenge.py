@@ -38,6 +38,7 @@ def minimal_task():
     
 
 {
-    "search_phrase": "israeli war",
-    "months_to_search": 3
+    "search_phrase": "climate change",
+    "months_to_search": 2,
+    "order_by": ""
 }
