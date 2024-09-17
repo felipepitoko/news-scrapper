@@ -15,13 +15,17 @@ def minimal_task():
         for item in workitems.inputs:
             logger.info(f"Started working on workitem.")
             workdata = item.payload
+            search_phrase = workdata.get('search_phrase', '')
+            topic_sort_key = workdata.get('topic_sort_key', None)
+            months_to_search = workdata.get('months_to_search', 1)
+
             rpa = RpaNewsLatimesRobocorp()
             rpa.set_webdriver()
             rpa.open_url("https://www.latimes.com/")
-            rpa.search_content(search_phrase=workdata['search_phrase'])            
-            rpa.sort_news_results(topic_sort_key=workdata['topic_sort_key'])       
+            rpa.search_content(search_phrase=search_phrase)            
+            rpa.sort_news_results(topic_sort_key=topic_sort_key)       
 
-            rpa.get_news(max_months=workdata['months_to_search'])    
+            rpa.get_news(max_months=months_to_search)    
 
             rpa.driver_quit()
             news_list = rpa.export_retrieved_news()
