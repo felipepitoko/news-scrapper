@@ -18,6 +18,7 @@ def minimal_task():
             search_phrase = workdata.get('search_phrase', '')
             topic_sort_key = workdata.get('topic_sort_key', None)
             months_to_search = workdata.get('months_to_search', 1)
+            order_by = workdata.get('order_by', 'relevance')
 
             rpa = RpaNewsLatimesRobocorp()
             rpa.set_webdriver()
@@ -37,6 +38,6 @@ def minimal_task():
     
 
 {
-    "search_phrase": "climate change",
+    "search_phrase": "israeli war",
     "months_to_search": 3
 }

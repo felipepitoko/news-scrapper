@@ -86,18 +86,29 @@ class RpaNewsLatimesRobocorp:
             self.logger.error(f"Error searching content: {e}")
             raise e
 
-    def sort_news_results(self, topic_sort_key:str=None):
+    def sort_news_results(self, topic_sort_key:str=None, sort_by=None):
         """Sort the search results by newest and topic, if applicable
         """
         try:
-            select_list = self.driver.find_element('css:select.select-input')
-            self.driver.select_from_list_by_value(select_list, '1')
+            if sort_by:
+                select_list = self.driver.find_element(
+                    'css:select.select-input')
+                
+                if sort_by == 'newest':
+                    self.driver.select_from_list_by_value(
+                        select_list, '1')
+                    
+                    self.logger.info(f"News sorted by newest.")
+                elif sort_by == 'oldest':
+                    self.driver.select_from_list_by_value(
+                        select_list, '2')
+                    self.logger.info(f"News sorted by oldest.")
 
-            time.sleep(5)
-
-            self.logger.info(f"News sorted by newest.")
-            self.driver.screenshot(locator=None, 
-                                   filename='output/sorted_newest.png')
+                time.sleep(3)
+                
+                self.driver.screenshot(locator=None, 
+                                        filename=\
+                                        f'output/sorted_by_{sort_by}.png')
 
             if topic_sort_key:
                 self.driver.click_button('css:button.see-all-button')  
