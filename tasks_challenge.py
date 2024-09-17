@@ -34,3 +34,9 @@ def minimal_task():
     except Exception as e:
         logger.error(f"Error on task execution: {e}")
         raise e
+    
+
+{
+    "search_phrase": "climate change",
+    "months_to_search": 3
+}

@@ -273,8 +273,6 @@ class RpaNewsLatimesRobocorp:
                             'total_search_matches': total_search_matches,
                             'money_mentioned': 'True' if total_money_matches else 'False'
                         })
-
-                        all_news_retrieved = True
                     except Exception as e:
                         all_news_retrieved = True
                         self.logger.error(f"Error getting news: {e}")
