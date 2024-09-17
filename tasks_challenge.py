@@ -24,7 +24,7 @@ def minimal_task():
             rpa.set_webdriver()
             rpa.open_url("https://www.latimes.com/")
             rpa.search_content(search_phrase=search_phrase)            
-            rpa.sort_news_results(topic_sort_key=topic_sort_key)       
+            rpa.sort_news_results(topic_sort_key=topic_sort_key,order_by=order_by)       
 
             rpa.get_news(max_months=months_to_search)    
 
