@@ -2,14 +2,6 @@
 # https://github.com/robocorp/rcc/blob/master/docs/recipes.md#what-is-in-robotyaml
 
 tasks:
-  Ler workitem:
-    shell: python -m robocorp.tasks run tasks.py
-  Acessar pagina:
-    shell: python -m robocorp.tasks run tasks_rpa.py
-  Saving files:
-    shell: python -m robocorp.tasks run saving_files.py
-  Custom selenium:
-    shell: python -m robocorp.tasks run tasks_custom_selenium.py
   thoughtfull ai challenge:
     shell: python -m robocorp.tasks run tasks_challenge.py
 
